@@ -201,6 +201,15 @@ public class Day1SecretEntrance
    * sum_dial_pointer_is_zero           3
    * sum_zero_positions_during_rotation 4
    * sum zeros                          7
+   * 
+   * Challenges:
+   * - In the input list there are sequences that excedec the Dial-Max limit. 
+   *   This was not done in the example.
+   *   
+   * - What counts as a rotation over 0. 
+   *   It must be ensured that going from 0 to any number always causes an overflow. 
+   *   This overflow should not be considered in the second part.
+   * 
    */
 
   public static void main( String[] args )
@@ -482,7 +491,6 @@ public class Day1SecretEntrance
     {
       if ( pString != null )
       {
-
         return Integer.parseInt( pString.trim() );
       }
     }
