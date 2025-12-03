@@ -82,9 +82,7 @@ public class Day2GiftShop
    *     998-1012              now has two invalid IDs, 999 and 1010.
    *     1188511880-1188511890 still has one invalid ID, 1188511885.
    *     222220-222224         still has one invalid ID, 222222.
-   *     
    *     1698522-1698528       still contains no invalid IDs.
-   *     
    *     446443-446449         still has one invalid ID, 446446.
    *     38593856-38593862     still has one invalid ID, 38593859.
    *     565653-565659         now has one invalid ID, 565656.
@@ -92,7 +90,6 @@ public class Day2GiftShop
    *     2121212118-2121212124 now has one invalid ID, 2121212121.
    *     
    * Adding up all the invalid IDs in this example produces 4174379265.
-   *                                                        4174379265
    *                                                        
    * What do you get if you add up all of the invalid IDs using these new rules?
    * 
@@ -212,7 +209,6 @@ public class Day2GiftShop
     wl( "sum_ranges " + sum_ranges.toPlainString() );
     wl( "" );
     wl( "" );
-    wl( "" );
   }
 
   private static BigDecimal checkRangePart1( String pRange )
@@ -298,7 +294,6 @@ public class Day2GiftShop
 
     wl( "" );
     wl( "sum_ranges " + sum_ranges.toPlainString() );
-    wl( "" );
     wl( "" );
     wl( "" );
   }
@@ -416,34 +411,67 @@ public class Day2GiftShop
 
       if ( pPatternIndexEnd < str_length )
       {
+        /*
+         * Points to the character in the first pattern.
+         * Next character to be compared.
+         */
         int pattern_index_act = 0;
+
+        /*
+         * Points to the string-index, where the compare pattern ends.
+         */
         int pattern_index_end = pPatternIndexEnd;
 
+        /*
+         * Points to the next character, compared to the first pattern.
+         */
         int pattern_check_index = pPatternIndexEnd + 1;
 
         while ( pattern_check_index < str_length )
         {
           char pattern_char = pString.charAt( pattern_index_act );
+
           char check_char = pString.charAt( pattern_check_index );
 
           if ( pattern_char == check_char )
           {
+            /*
+             * Character match
+             */
+
             if ( pattern_index_act == pattern_index_end )
             {
+              /*
+               * If the pattern_index_act reaches the end index,
+               * than we found a new pattern occurance.
+               */
               pattern_count++;
 
+              /*
+               * For the next round, the pattern_index_act is reseted to the index 0.
+               */
               pattern_index_act = 0;
             }
             else
             {
+              /*
+               * If we're not done with the pattern matching, the 
+               * index for the first pattern needs to be increased.
+               */
               pattern_index_act++;
             }
 
+            /*
+             * The pattern_check_index is increased for every round.
+             */
             pattern_check_index++;
           }
           else
           {
-            return 0; // Muster stimmen nicht ueberein
+            /*
+             * Character mismatch = return 0
+             */
+            return 0;
           }
         }
 
