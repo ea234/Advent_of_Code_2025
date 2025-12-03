@@ -1,5 +1,18 @@
 package de.ea234.day2;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.math.BigDecimal;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import de.ea234.util.FkString;
+
 public class Day2GiftShop
 {
 
@@ -55,11 +68,174 @@ public class Day2GiftShop
    * 
    *     The rest of the ranges contain no invalid IDs.
    * Adding up all the invalid IDs in this example produces 1227775554.
+   *                                                        1227775554
    * 
    * What do you get if you add up all of the invalid IDs?
+   * sum_ranges_1 64215794229
    * 
+   * 
+   * 
+   * 
+   * --- Part Two ---
+   * 
+   * The clerk quickly discovers that there are still invalid IDs in the ranges in your
+   * list. Maybe the young Elf was doing other silly patterns as well?
+   * 
+   * Now, an ID is invalid if it is made only of some sequence of digits repeated at
+   * least twice. So, 12341234 (1234 two times), 123123123 (123 three times), 1212121212
+   * (12 five times), and 1111111 (1 seven times) are all invalid IDs.
+   * 
+   * From the same example as before:
+   *     11-22 still has two invalid IDs, 11 and 22.
+   *     95-115 now has two invalid IDs, 99 and 111.
+   *     998-1012 now has two invalid IDs, 999 and 1010.
+   *     1188511880-1188511890 still has one invalid ID, 1188511885.
+   *     222220-222224 still has one invalid ID, 222222.
+   *     1698522-1698528 still contains no invalid IDs.
+   *     446443-446449 still has one invalid ID, 446446.
+   *     38593856-38593862 still has one invalid ID, 38593859.
+   *     565653-565659 now has one invalid ID, 565656.
+   *     824824821-824824827 now has one invalid ID, 824824824.
+   *     2121212118-2121212124 now has one invalid ID, 2121212121.
+   *     
+   * Adding up all the invalid IDs in this example produces 4174379265.
+   * 
+   * What do you get if you add up all of the invalid IDs using these new rules?
    * 
    * 
    * 
    */
+
+  public static void main( String[] args )
+  {
+    checkX( getListProd() );
+
+    String test_content = "11-22,95-115,998-1012,1188511880-1188511890,222220-222224,1698522-1698528,446443-446449,38593856-38593862,565653-565659,824824821-824824827,2121212118-2121212124";
+
+    List< String > test_content_list = Arrays.stream( test_content.split( "," ) ).map( String::trim ).collect( Collectors.toList() );
+
+    checkX( test_content_list );
+  }
+
+  public static void checkX( List< String > pListIdRanges )
+  {
+    if ( pListIdRanges == null )
+    {
+      wl( "pListIdRanges == null" );
+
+      return;
+    }
+
+    BigDecimal sum_ranges_1 = new BigDecimal( 0 );
+
+    for ( int rotation_list_index = 0; rotation_list_index < pListIdRanges.size(); rotation_list_index++ )
+    {
+      String range_string = pListIdRanges.get( rotation_list_index );
+
+      sum_ranges_1 = sum_ranges_1.add( checkRange( range_string ) );
+    }
+
+    wl( "" );
+    wl( "sum_ranges_1 " + sum_ranges_1.toPlainString() );
+    wl( "" );
+    wl( "" );
+    wl( "" );
+  }
+
+  private static BigDecimal checkRange( String pRange )
+  {
+    String[] range_split = pRange.trim().split( "-" );
+
+    String range_von = range_split[ 0 ];
+    String range_bis = range_split[ 1 ];
+
+    long range_start = Long.parseLong( range_von );
+    long range_end = Long.parseLong( range_bis );
+
+    if ( range_start > range_end )
+    {
+      long temp = range_end;
+
+      range_end = range_start;
+
+      range_start = temp;
+    }
+
+    wl( "Range From " + range_start + " To " + range_end + " = " + ( range_end - range_start ) );
+
+    BigDecimal sum_counter = new BigDecimal( 0 );
+
+    int nr_counter = 0;
+
+    int counter_equal = 0;
+
+    for ( long range_value = range_start; range_value <= range_end; range_value++ )
+    {
+      nr_counter++;
+
+      String range_value_str = Long.toString( Math.abs( range_value ) );
+
+      boolean knz_sind_gleich = false;
+
+      boolean knz_is_even = ( range_value_str.length() % 2 ) == 0;
+
+      if ( knz_is_even )
+      {
+        int range_value_str_len = range_value_str.length();
+
+        int range_value_str_mitte = range_value_str_len / 2;
+
+        //int str_start_index_1 = 0;
+        //int str_start_index_2 = range_value_str_mitte;
+        //range_value_str.charAt( str_start_index_1 ) == range_value_str.charAt( str_start_index_1 );
+
+        String first_half = range_value_str.substring( 0, range_value_str_mitte );
+        String second_half = range_value_str.substring( range_value_str_mitte );
+
+        knz_sind_gleich = first_half.equals( second_half );
+      }
+
+      if ( knz_sind_gleich )
+      {
+        counter_equal++;
+
+        sum_counter = sum_counter.add( new BigDecimal( range_value ) );
+
+        wl( "    Nr. " + nr_counter + "  " + counter_equal + " " + range_value + " is_even " + knz_is_even + " knz_sind_gleich " + knz_sind_gleich + " " + sum_counter.toPlainString() );
+      }
+    }
+
+    return sum_counter;
+  }
+
+  private static List< String > getListProd()
+  {
+    String datei_input = "/mnt/hd4tbb/daten/zdownload/advent_of_code_2025__day2_input.txt";
+
+    try
+    {
+      String content = Files.readString( Path.of( datei_input ) );
+
+      List< String > list_string = Arrays.stream( content.split( "," ) ).map( String::trim ).collect( Collectors.toList() );
+
+      return list_string;
+    }
+    catch ( IOException error_inst )
+    {
+      error_inst.printStackTrace();
+    }
+
+    return null;
+  }
+
+  /**
+   * Ausgabe auf System.out
+   * 
+   * @param pString der auszugebende String
+   */
+  private static void wl( String pString )
+  {
+    System.out.println( pString );
+  }
+
 }

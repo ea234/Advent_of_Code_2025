@@ -45,7 +45,7 @@ public class Day1SecretEntrance
    * "Due to new security protocols, the password is locked
    * in the safe below. Please see the attached document for
    * the new combination."
-   * 9371
+   * 
    * The safe has a dial with only an arrow on it; around the
    * dial are the numbers 0 through 99 in order. As you turn
    * the dial, it makes a small click noise as it reaches each
@@ -167,7 +167,16 @@ public class Day1SecretEntrance
    *   
    * Using password method 0x434C49434B, what is the password
    * to open the door?
-   *
+   * 
+   * 
+   * 0x434C49434B
+   * 
+   *    43 C
+   *    4C L
+   *    49 I
+   *    43 C
+   *    4B K
+   *  
    * ----------------------------------------------------------------------------
    * 
    *  Nr. 0 L68    L From   50 To   82    -18  Zero-Flag true    1  1
@@ -203,7 +212,7 @@ public class Day1SecretEntrance
    * sum zeros                          7
    * 
    * Challenges:
-   * - In the input list there are sequences that excedec the Dial-Max limit. 
+   * - In the input list there are sequences that exceded the Dial-Max limit. 
    *   This was not done in the example.
    *   
    * - What counts as a rotation over 0. 
@@ -225,7 +234,7 @@ public class Day1SecretEntrance
     calcPassword( rotation_list_test2, 50 );
   }
 
-  public static void calcPassword( List< String > pListRotationSequenzes, int pDialPointerStart )
+  private static void calcPassword( List< String > pListRotationSequenzes, int pDialPointerStart )
   {
     int dial_pointer_start = pDialPointerStart;
 
@@ -559,7 +568,7 @@ public class Day1SecretEntrance
      *
      * Der Aufrufer bekommt den Teilstring ab der Position 0 bis zur
      * Anzahl der abzuschneidenden Stellen zurueck. 
-     */
+     */  
     if ( pAnzahlStellen < pString.length() )
     {
       return pString.substring( 0, pAnzahlStellen );
