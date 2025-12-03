@@ -110,7 +110,8 @@ public class Day1SecretEntrance
    * 
    * Analyze the rotations in your attached document. What's the actual password to open the door?
    * 
-   * --- Part Two ---
+   * 
+   * --- Part Two -----------------------------------------------------------
    * 
    * You're sure that's the right password, but the door won't
    * open. You knock, but nobody answers. You build a snowman
@@ -176,8 +177,9 @@ public class Day1SecretEntrance
    *    49 I
    *    43 C
    *    4B K
-   *  
-   * ----------------------------------------------------------------------------
+   * 
+   * 
+   * ------------------------------------------------------------------------
    * 
    *  Nr. 0 L68    L From   50 To   82    -18  Zero-Flag true    1  1
    *  Nr. 1 L30    L From   82 To   52     52  Zero-Flag false   0  1

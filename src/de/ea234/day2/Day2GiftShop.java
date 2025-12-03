@@ -1,23 +1,16 @@
 package de.ea234.day2;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import de.ea234.util.FkString;
-
 public class Day2GiftShop
 {
-
   /*
-   * 
    * --- Day 2: Gift Shop ---
    * https://adventofcode.com/2025/day/2
    *
@@ -68,15 +61,12 @@ public class Day2GiftShop
    * 
    *     The rest of the ranges contain no invalid IDs.
    * Adding up all the invalid IDs in this example produces 1227775554.
-   *                                                        1227775554
    * 
    * What do you get if you add up all of the invalid IDs?
-   * sum_ranges_1 64215794229
+   * sum_ranges 64215794229
    * 
    * 
-   * 
-   * 
-   * --- Part Two ---
+   * --- Part Two -----------------------------------------------------------
    * 
    * The clerk quickly discovers that there are still invalid IDs in the ranges in your
    * list. Maybe the young Elf was doing other silly patterns as well?
@@ -103,6 +93,40 @@ public class Day2GiftShop
    * What do you get if you add up all of the invalid IDs using these new rules?
    * 
    * 
+   * ------------------------------------------------------------------------
+   * 
+   * Range From 11 To 22 = Number of Values 11
+   *     Nr. 1  1 11 is_even true 
+   *     Nr. 12  2 22 is_even true 
+   * 
+   * Range From 95 To 115 = Number of Values 20
+   *     Nr. 5  1 99 is_even true 
+   * 
+   * Range From 998 To 1012 = Number of Values 14
+   *     Nr. 13  1 1010 is_even true 
+   * 
+   * Range From 1188511880 To 1188511890 = Number of Values 10
+   *     Nr. 6  1 1188511885 is_even true 
+   * 
+   * Range From 222220 To 222224 = Number of Values 4
+   *     Nr. 3  1 222222 is_even true 
+   * 
+   * Range From 1698522 To 1698528 = Number of Values 6
+   * 
+   * Range From 446443 To 446449 = Number of Values 6
+   *     Nr. 4  1 446446 is_even true 
+   * 
+   * Range From 38593856 To 38593862 = Number of Values 6
+   *     Nr. 4  1 38593859 is_even true 
+   * 
+   * Range From 565653 To 565659 = Number of Values 6
+   * 
+   * Range From 824824821 To 824824827 = Number of Values 6
+   * 
+   * Range From 2121212118 To 2121212124 = Number of Values 6
+   * 
+   * sum_ranges 1227775554
+   * 
    * 
    */
 
@@ -126,17 +150,17 @@ public class Day2GiftShop
       return;
     }
 
-    BigDecimal sum_ranges_1 = new BigDecimal( 0 );
+    BigDecimal sum_ranges = new BigDecimal( 0 );
 
     for ( int rotation_list_index = 0; rotation_list_index < pListIdRanges.size(); rotation_list_index++ )
     {
       String range_string = pListIdRanges.get( rotation_list_index );
 
-      sum_ranges_1 = sum_ranges_1.add( checkRange( range_string ) );
+      sum_ranges = sum_ranges.add( checkRange( range_string ) );
     }
 
     wl( "" );
-    wl( "sum_ranges_1 " + sum_ranges_1.toPlainString() );
+    wl( "sum_ranges " + sum_ranges.toPlainString() );
     wl( "" );
     wl( "" );
     wl( "" );
@@ -161,7 +185,8 @@ public class Day2GiftShop
       range_start = temp;
     }
 
-    wl( "Range From " + range_start + " To " + range_end + " = " + ( range_end - range_start ) );
+    wl( "" );
+    wl( "Range From " + range_start + " To " + range_end + " = Number of Values " + ( range_end - range_start ) );
 
     BigDecimal sum_counter = new BigDecimal( 0 );
 
@@ -175,11 +200,11 @@ public class Day2GiftShop
 
       String range_value_str = Long.toString( Math.abs( range_value ) );
 
-      boolean knz_sind_gleich = false;
+      boolean knz_strings_equal = false;
 
-      boolean knz_is_even = ( range_value_str.length() % 2 ) == 0;
+      boolean knz_is_even_character_length = ( range_value_str.length() % 2 ) == 0;
 
-      if ( knz_is_even )
+      if ( knz_is_even_character_length )
       {
         int range_value_str_len = range_value_str.length();
 
@@ -192,16 +217,16 @@ public class Day2GiftShop
         String first_half = range_value_str.substring( 0, range_value_str_mitte );
         String second_half = range_value_str.substring( range_value_str_mitte );
 
-        knz_sind_gleich = first_half.equals( second_half );
+        knz_strings_equal = first_half.equals( second_half );
       }
 
-      if ( knz_sind_gleich )
+      if ( knz_strings_equal )
       {
         counter_equal++;
 
         sum_counter = sum_counter.add( new BigDecimal( range_value ) );
 
-        wl( "    Nr. " + nr_counter + "  " + counter_equal + " " + range_value + " is_even " + knz_is_even + " knz_sind_gleich " + knz_sind_gleich + " " + sum_counter.toPlainString() );
+        wl( "    Nr. " + nr_counter + "  " + counter_equal + " " + range_value + " is_even " + knz_is_even_character_length + " " ); // + sum_counter.toPlainString() );
       }
     }
 
