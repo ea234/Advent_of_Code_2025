@@ -172,9 +172,9 @@ public class Day2GiftShop
    * 
    */
 
-  public static final BigDecimal BIG_DECIMAL_0  = new BigDecimal( "0" );
+  private static final BigDecimal BIG_DECIMAL_0  = new BigDecimal( "0" );
 
-  public static final BigDecimal BIG_DECIMAL_10 = new BigDecimal( "10" );
+  private static final BigDecimal BIG_DECIMAL_10 = new BigDecimal( "10" );
 
   public static void main( String[] args )
   {
@@ -191,7 +191,7 @@ public class Day2GiftShop
     //startTestCountNr();
   }
 
-  public static void checkListPart1( List< String > pListIdRanges )
+  private static void checkListPart1( List< String > pListIdRanges )
   {
     if ( pListIdRanges == null )
     {
@@ -278,7 +278,7 @@ public class Day2GiftShop
     return sum_counter;
   }
 
-  public static void checkListPart2( List< String > pListIdRanges )
+  private static void checkListPart2( List< String > pListIdRanges )
   {
     if ( pListIdRanges == null )
     {

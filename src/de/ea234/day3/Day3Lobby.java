@@ -254,9 +254,9 @@ public class Day3Lobby
    *  Indexe                 12                       12
    */
 
-  public static final BigDecimal BIG_DECIMAL_0  = new BigDecimal( "0" );
+  private static final BigDecimal BIG_DECIMAL_0  = new BigDecimal( "0" );
 
-  public static final BigDecimal BIG_DECIMAL_10 = new BigDecimal( "10" );
+  private static final BigDecimal BIG_DECIMAL_10 = new BigDecimal( "10" );
 
   public static void main( String[] args )
   {
@@ -273,7 +273,7 @@ public class Day3Lobby
     //startTestCalcJoltage();
   }
 
-  public static void startListCalcJoltage( List< String > pList, int pDigitAmount, boolean pKnzDebug )
+  private static void startListCalcJoltage( List< String > pList, int pDigitAmount, boolean pKnzDebug )
   {
     if ( pList == null )
     {
@@ -453,7 +453,7 @@ public class Day3Lobby
   {
     int anzahl_zeilen_gelesen = 0;
 
-    List< String > zeilenArrays = new ArrayList();
+    List< String > zeilenArrays = new ArrayList< String >();
 
     String datei_input = "/mnt/hd4tbb/daten/zdownload/advent_of_code_2025__day3_input.txt";
 

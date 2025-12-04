@@ -1633,120 +1633,12 @@ public class FkString
   }
 
   /**
-   * <pre>
-   * Zaehlt die Anzahl der Vorkommen vom Suchstring im ersten Parameter. 
-   * 
-   * Es werden keine geschachtelten Vorkommen gezaehlt.
-   * 
-   * Es werden keine Leerstrings gezaehlt.
-   * 
-   * FkString.getAnzahl( " A   A   A  B  A ", "A"     ) = 4
-   * FkString.getAnzahl( " A   A   A  B  A ", "B"     ) = 1
-   * FkString.getAnzahl( " A   A   A  B  A ", "C"     ) = 0 = C nicht enthalten
-   * FkString.getAnzahl( " A   A   A  B  A ", "A  "   ) = 3 = A mit zwei Leerzeichen
-   * FkString.getAnzahl( " A   A   A  B  A ", "A   A" ) = 1 = keine geschachtelten Vorkommen
-   *   
-   * FkString.getAnzahl( " A   A   A  B  A ", " A   A   A  B  A " ) = 1 = pString gleich pSuchString
-   *
-   * FkString.getAnzahl(    "", " A " ) = 0 = pString ist ein Leerstring
-   * FkString.getAnzahl( " A ",    "" ) = 0 = pSuchString ist ein Leerstring
-   * FkString.getAnzahl(    "",    "" ) = 0 = beide Parameter sind ein Leerstring
-   * 
-   * FkString.getAnzahl(  null, " A " ) = 0 = pString nicht angegeben 
-   * FkString.getAnzahl( " A ",  null ) = 0 = pSuchString nicht angegeben
-   * FkString.getAnzahl(  null,  null ) = 0 = beide Parameter nicht angegeben
-   *   
-   * </pre>
-   * 
-   * @param pString der zu durchsuchende String
-   * @param pSuchString der Suchstring, welcher gesucht (=gezaehlt) wird
-   * @return die Anzahl der Vokommen von pSuchString in pString
-   */
-  private static int getAnzahl( String pString, String pSuchString )
-  {
-    int zaehler_vorkommen = 0; // Anzahl der gezaehlten Vorkommen ist initial 0 
-
-    /*
-     * Pruefung der Eingabeparameter
-     * pString     = muss gesetzt sein und mindestens 1 Zeichen haben (kein Trim)
-     * pSuchString = muss gesetzt sein 
-     */
-    if ( ( pString != null ) && ( pString.length() > 0 ) && ( pSuchString != null ) )
-    {
-      /* 
-       * Laenge der Suchzeichenfolge
-       * Die Laenge der Such-Zeichenfolge wird der aktuellen Startposition hinzugezaehlt.
-       */
-      int laenge_such_string = pSuchString.length();
-
-      /* 
-       * Pruefung: Suchstring = Leerstring
-       * Bei einer Suche nach einem Leerstring wuerde es zu einer Endlosschleife kommen.
-       * Um das zu verhindern, darf die Schleife nur bei einem Suchstring mit mehr
-       * als 0 Zeichen gestartet werden.
-       */
-      if ( laenge_such_string > 0 )
-      {
-        /*
-         * Startposition bestimmen
-         * Die aktuelle Fundstelle des Suchstringes wird ermittelt. Ist die initialie
-         * Fundstelle -1, wird die weitere Suchschleife nicht gestartet. 
-         */
-        int aktuelle_position = pString.indexOf( pSuchString );
-
-        /* Suchschleife
-         * Solange der Suchstring noch gefunden wird, ist die Variable "aktuelle_position" 
-         * groesser als 0. Der Zaehler der Vorkommen wird erhoeht und anschliessend die 
-         * neue aktuelle Position des Suchstrings ermittelt. 
-         */
-        while ( aktuelle_position >= 0 )
-        {
-          zaehler_vorkommen++;
-
-          aktuelle_position = pString.indexOf( pSuchString, aktuelle_position + laenge_such_string );
-        }
-      }
-    }
-
-    /*
-     * Zum Schluss wird dem Aufrufer die Variable mit den gezaehlten Vorkommen 
-     * zurueckgegeben. Bei Parameterfehlern ist diese Variable 0.
-     */
-    return zaehler_vorkommen;
-  }
-
-  /**
-   * @param pZeichen das Zeichen
-   * @return den Ascii-Wert des Zeichens
-   */
-  private static int getAscii( char pZeichen )
-  {
-    return (int) pZeichen;
-  }
-
-  /**
    * @param pAscii der Ascii-Code
    * @return das Zeichen fuer den Ascii-Code
    */
   private static char getChar( int pAscii )
   {
     return (char) pAscii;
-  }
-
-  /**
-   * @param pZeichen das Zeichen
-   * @return einen String der Laenge 3 mit den Ascii-Wert des Zeichens
-   */
-  private static String getAsciiString( char pZeichen )
-  {
-    /*
-     * Zur Zahl 1000 wird der ASCII-Wert des Zeichens hinzugefuegt. Das Ergebnis
-     * wird zu einem String gewandelt, von welchem jetzt die Laenge von 4 Zeichen
-     * bekannt ist. Von diesem String wird ab der zweiten Position der Substring
-     * zurueckgegeben. Dieses bewirkt ein Ergebnis mit 3 Stellen und
-     * fuehrenden Nullen.
-     */
-    return ( "" + ( 1000 + ( (int) pZeichen ) ) ).substring( 1 );
   }
 
   /**
@@ -2099,46 +1991,6 @@ public class FkString
     return pLaenge1;
   }
 
-  /**
-   * Prueft ob ein String ungleich "null" und einen Inhalt hat. 
-   * Bei der Laengenpruefung wird ein TRIM auf den Eingabestring gemacht.
-   * 
-   * @param pString der zu pruefende String
-   * @return TRUE wenn ungleich "null" und mindestens ein Zeichen vorhanden ist
-   */
-  private static boolean isSet( String pString )
-  {
-    if ( ( pString != null ) && ( pString.trim().length() > 0 ) )
-    {
-      /*
-       * JA, der uebergebene String ist gesetzt und kein Leerstring
-       */
-      return true; // 
-    }
-
-    return false; // NEIN, der uebergebene String ist NULL oder hat eine Laenge von 0
-  }
-
-  /**
-   * Bei der Laengenpruefung wird ein TRIM auf den Eingabestring gemacht.
-   * 
-   * @param pString1 der erste String 
-   * @param pString2 der zweite String
-   * @return TRUE wenn beide Strings ungleich null und mindestens 1 Zeichen haben.
-   */
-  private static boolean isSet( String pString1, String pString2 )
-  {
-    if ( ( pString1 != null ) && ( pString2 != null ) )
-    {
-      if ( ( pString1.trim().length() > 0 ) && ( pString2.trim().length() > 0 ) )
-      {
-        return true;
-      }
-    }
-
-    return false;
-  }
-
   private static boolean isSetOr( String pString1, String pString2 )
   {
     return ( ( pString1 != null ) && ( pString1.trim().length() > 0 ) ) || ( ( pString2 != null ) && ( pString2.trim().length() > 0 ) );
@@ -2147,91 +1999,6 @@ public class FkString
   private static boolean isSetOr( String pString1, String pString2, String pString3 )
   {
     return ( ( pString1 != null ) && ( pString1.trim().length() > 0 ) ) || ( ( pString2 != null ) && ( pString2.trim().length() > 0 ) ) || ( ( pString3 != null ) && ( pString3.trim().length() > 0 ) );
-  }
-
-  /**
-   * Bei der Laengenpruefung wird ein TRIM auf den Eingabestring gemacht.
-   * @param pString1 der erste String 
-   * @param pString2 der zweite String
-   * @param pString3 der dritte String 
-   * @return TRUE wenn alle Strings ungleich null und mindestens 1 Zeichen haben.
-   */
-  private static boolean isSet( String pString1, String pString2, String pString3 )
-  {
-    if ( ( pString1 != null ) && ( pString2 != null ) && ( pString3 != null ) )
-    {
-      if ( ( pString1.trim().length() > 0 ) && ( pString2.trim().length() > 0 ) && ( pString3.trim().length() > 0 ) )
-      {
-        return true;
-      }
-    }
-
-    return false;
-  }
-
-  private static boolean isSet( String pString1, String pString2, String pString3, String pString4 )
-  {
-    if ( ( pString1 != null ) && ( pString2 != null ) && ( pString3 != null ) && ( pString4 != null ) )
-    {
-      if ( ( pString1.trim().length() > 0 ) && ( pString2.trim().length() > 0 ) && ( pString3.trim().length() > 0 ) && ( pString4.trim().length() > 0 ) )
-      {
-        return true;
-      }
-    }
-
-    return false;
-  }
-
-  private static boolean isSet( String pString1, String pString2, String pString3, String pString4, String pString5 )
-  {
-    if ( ( pString1 != null ) && ( pString2 != null ) && ( pString3 != null ) && ( pString4 != null ) && ( pString5 != null ) )
-    {
-      if ( ( pString1.trim().length() > 0 ) && ( pString2.trim().length() > 0 ) && ( pString3.trim().length() > 0 ) && ( pString4.trim().length() > 0 ) && ( pString5.trim().length() > 0 ) )
-      {
-        return true;
-      }
-    }
-
-    return false;
-  }
-
-  private static boolean isSet( String pString1, String pString2, String pString3, String pString4, String pString5, String pString6 )
-  {
-    if ( ( pString1 != null ) && ( pString2 != null ) && ( pString3 != null ) && ( pString4 != null ) && ( pString5 != null ) && ( pString6 != null ) )
-    {
-      if ( ( pString1.trim().length() > 0 ) && ( pString2.trim().length() > 0 ) && ( pString3.trim().length() > 0 ) && ( pString4.trim().length() > 0 ) && ( pString5.trim().length() > 0 ) && ( pString6.trim().length() > 0 ) )
-      {
-        return true;
-      }
-    }
-
-    return false;
-  }
-
-  private static boolean isSet( String pString1, String pString2, String pString3, String pString4, String pString5, String pString6, String pString7 )
-  {
-    if ( ( pString1 != null ) && ( pString2 != null ) && ( pString3 != null ) && ( pString4 != null ) && ( pString5 != null ) && ( pString6 != null ) && ( pString7 != null ) )
-    {
-      if ( ( pString1.trim().length() > 0 ) && ( pString2.trim().length() > 0 ) && ( pString3.trim().length() > 0 ) && ( pString4.trim().length() > 0 ) && ( pString5.trim().length() > 0 ) && ( pString6.trim().length() > 0 ) && ( pString7.trim().length() > 0 ) )
-      {
-        return true;
-      }
-    }
-
-    return false;
-  }
-
-  private static boolean isSet( String pString1, String pString2, String pString3, String pString4, String pString5, String pString6, String pString7, String pString8 )
-  {
-    if ( ( pString1 != null ) && ( pString2 != null ) && ( pString3 != null ) && ( pString4 != null ) && ( pString5 != null ) && ( pString6 != null ) && ( pString7 != null ) && ( pString8 != null ) )
-    {
-      if ( ( pString1.trim().length() > 0 ) && ( pString2.trim().length() > 0 ) && ( pString3.trim().length() > 0 ) && ( pString4.trim().length() > 0 ) && ( pString5.trim().length() > 0 ) && ( pString6.trim().length() > 0 ) && ( pString7.trim().length() > 0 ) && ( pString8.trim().length() > 0 ) )
-      {
-        return true;
-      }
-    }
-
-    return false;
   }
 
   /**
@@ -2334,20 +2101,6 @@ public class FkString
     }
 
     return pString.length() > 0;
-  }
-
-  /**
-   * @param pStringBuffer der zu pruefende Stringbuffer
-   * @return TRUE bei ungleich null und mindestens ein Zeichen, sonst FALSE
-   */
-  private static boolean isSet( StringBuffer pStringBuffer )
-  {
-    if ( pStringBuffer == null )
-    {
-      return false;
-    }
-
-    return pStringBuffer.toString().trim().length() > 0;
   }
 
   private static int InStr( String pZuDurchsuchenderString, String pSuchString )

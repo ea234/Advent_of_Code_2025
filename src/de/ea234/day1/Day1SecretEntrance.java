@@ -454,7 +454,7 @@ public class Day1SecretEntrance
   {
     int anzahl_zeilen_gelesen = 0;
 
-    List< String > zeilenArrays = new ArrayList();
+    List< String > zeilenArrays = new ArrayList< String >();
 
     String datei_input = "/mnt/hd4tbb/daten/zdownload/advent_of_code_2025__day1_input.txt";
 
