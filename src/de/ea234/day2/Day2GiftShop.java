@@ -172,6 +172,10 @@ public class Day2GiftShop
    * 
    */
 
+  public static final BigDecimal BIG_DECIMAL_0  = new BigDecimal( "0" );
+
+  public static final BigDecimal BIG_DECIMAL_10 = new BigDecimal( "10" );
+
   public static void main( String[] args )
   {
     String test_content = "11-22,95-115,998-1012,1188511880-1188511890,222220-222224,1698522-1698528,446443-446449,38593856-38593862,565653-565659,824824821-824824827,2121212118-2121212124";
@@ -196,13 +200,13 @@ public class Day2GiftShop
       return;
     }
 
-    BigDecimal sum_ranges = new BigDecimal( 0 );
+    BigDecimal sum_ranges = BIG_DECIMAL_0;
 
-    for ( int rotation_list_index = 0; rotation_list_index < pListIdRanges.size(); rotation_list_index++ )
+    for ( int list_index = 0; list_index < pListIdRanges.size(); list_index++ )
     {
-      String range_string = pListIdRanges.get( rotation_list_index );
+      String list_string = pListIdRanges.get( list_index );
 
-      sum_ranges = sum_ranges.add( checkRangePart1( range_string ) );
+      sum_ranges = sum_ranges.add( checkRangePart1( list_string ) );
     }
 
     wl( "" );
@@ -233,7 +237,7 @@ public class Day2GiftShop
     wl( "" );
     wl( "Range From " + range_start + " To " + range_end + " = Number of Values " + ( range_end - range_start ) );
 
-    BigDecimal sum_counter = new BigDecimal( 0 );
+    BigDecimal sum_counter = BIG_DECIMAL_0;
 
     int nr_counter = 0;
 
@@ -285,11 +289,11 @@ public class Day2GiftShop
 
     BigDecimal sum_ranges = new BigDecimal( 0 );
 
-    for ( int rotation_list_index = 0; rotation_list_index < pListIdRanges.size(); rotation_list_index++ )
+    for ( int list_index = 0; list_index < pListIdRanges.size(); list_index++ )
     {
-      String range_string = pListIdRanges.get( rotation_list_index );
+      String list_string = pListIdRanges.get( list_index );
 
-      sum_ranges = sum_ranges.add( checkRangePart2( range_string ) );
+      sum_ranges = sum_ranges.add( checkRangePart2( list_string ) );
     }
 
     wl( "" );

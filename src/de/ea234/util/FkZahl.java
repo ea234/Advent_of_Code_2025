@@ -240,32 +240,6 @@ public class FkZahl
     return ( pZahl < pUntergrenze ? pUntergrenze : ( pZahl > pObergrenze ? pObergrenze : pZahl ) );
   }
 
-  public static String getID()
-  {
-    String ergebnis_id = "";
-
-    Calendar datum = Calendar.getInstance();
-
-    int stunden = 0;
-    int minuten = 0;
-    int sekunden = 0;
-
-    stunden = datum.get( Calendar.HOUR_OF_DAY );
-    minuten = datum.get( Calendar.MINUTE );
-    sekunden = datum.get( Calendar.SECOND );
-
-    ergebnis_id += "" + ( ( datum.get( Calendar.YEAR ) * 10000 ) + ( ( datum.get( Calendar.MONTH ) + 1 ) * 100 ) + datum.get( Calendar.DATE ) );
-
-    ergebnis_id += ( stunden < 10 ? "0" : "" ) + stunden + ( minuten < 10 ? "0" : "" ) + minuten + ( sekunden < 10 ? "0" : "" ) + sekunden + ( FkString.right( "0000000000" + FkZahl.getLaufendeZahl(), 3 ) );
-
-    while ( sekunden == Calendar.getInstance().get( Calendar.SECOND ) )
-    {
-      // eine Sekunde warten
-    }
-
-    return ergebnis_id;
-  }
-
   /**
    * <pre>
    * Liefert die Information zurueck, ob die uebergebene Zahl einen vollen Tausenderbetrag ergibt.
@@ -2252,92 +2226,6 @@ public class FkZahl
     return (double) ( (int) ( pZahl * 1000 ) * 0.001 ) + 0.00000001;
   }
 
-  public static int checkAnzahlZiffern( String pString ) throws Exception
-  {
-    int anzahl_ziffer_1 = 0;
-    int anzahl_ziffer_2 = 0;
-    int anzahl_ziffer_3 = 0;
-    int anzahl_ziffer_4 = 0;
-    int anzahl_ziffer_5 = 0;
-    int anzahl_ziffer_6 = 0;
-    int anzahl_ziffer_7 = 0;
-    int anzahl_ziffer_8 = 0;
-    int anzahl_ziffer_9 = 0;
-    int anzahl_ziffer_0 = 0;
-
-    char aktuelles_zeichen;
-
-    int akt_index = 0;
-
-    while ( akt_index < pString.length() )
-    {
-      aktuelles_zeichen = pString.charAt( akt_index );
-
-      if ( aktuelles_zeichen == '1' )
-      {
-        anzahl_ziffer_1++;
-      }
-      else if ( aktuelles_zeichen == '2' )
-      {
-        anzahl_ziffer_2++;
-      }
-      else if ( aktuelles_zeichen == '3' )
-      {
-        anzahl_ziffer_3++;
-      }
-      else if ( aktuelles_zeichen == '4' )
-      {
-        anzahl_ziffer_4++;
-      }
-      else if ( aktuelles_zeichen == '5' )
-      {
-        anzahl_ziffer_5++;
-      }
-      else if ( aktuelles_zeichen == '6' )
-      {
-        anzahl_ziffer_6++;
-      }
-      else if ( aktuelles_zeichen == '7' )
-      {
-        anzahl_ziffer_7++;
-      }
-      else if ( aktuelles_zeichen == '8' )
-      {
-        anzahl_ziffer_8++;
-      }
-      else if ( aktuelles_zeichen == '9' )
-      {
-        anzahl_ziffer_9++;
-      }
-      else if ( aktuelles_zeichen == '0' )
-      {
-        anzahl_ziffer_0++;
-      }
-      else
-      {
-        throw new Exception( "getQuersumme() - Zeichen " + akt_index + " ist keine Zahl " );
-      }
-
-      akt_index++;
-    }
-
-    String temp_str = "";
-
-    temp_str += "\nanzahl_ziffer_1 =>" + anzahl_ziffer_1 + "<";
-    temp_str += "\nanzahl_ziffer_2 =>" + anzahl_ziffer_2 + "<";
-    temp_str += "\nanzahl_ziffer_3 =>" + anzahl_ziffer_3 + "<";
-    temp_str += "\nanzahl_ziffer_4 =>" + anzahl_ziffer_4 + "<";
-    temp_str += "\nanzahl_ziffer_5 =>" + anzahl_ziffer_5 + "<";
-    temp_str += "\nanzahl_ziffer_6 =>" + anzahl_ziffer_6 + "<";
-    temp_str += "\nanzahl_ziffer_7 =>" + anzahl_ziffer_7 + "<";
-    temp_str += "\nanzahl_ziffer_8 =>" + anzahl_ziffer_8 + "<";
-    temp_str += "\nanzahl_ziffer_9 =>" + anzahl_ziffer_9 + "<";
-    temp_str += "\nanzahl_ziffer_0 =>" + anzahl_ziffer_0 + "<";
-
-    FkLogger.wl( temp_str );
-
-    return 0;
-  }
 
   public static int getIntKennzeichenFeld( String pString )
   {
@@ -2585,7 +2473,7 @@ public class FkZahl
         if ( akt_index > 0 )
         {
           return false; // Struktur: Negativzeichen muss am Start stehen
-        }        
+        }
       }
       else
       {

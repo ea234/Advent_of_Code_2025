@@ -125,10 +125,12 @@ public class Day3Lobby
    * The total output joltage is now much larger: 
    * 
    * 987654321111 + 811111111119 + 434234234278 + 888911112111 = 3121910778619.
-   * 
+   *                                                             3121910778619
+   *  
    * What is the new total output joltage?
    *
-   * sum_joltages 17155
+   * sum_joltages 169685670469164
+   * 
    * 
    * ------------------------------------------------------------------------
    * 
@@ -154,7 +156,69 @@ public class Day3Lobby
    * ------------------------------------------------------------------------
    * 
    * 
+   * nr 0 von 3 (6) nach 0 (9)
+   * nr 1 von 4 (5) nach 1 (8)
+   * nr 2 von 5 (4) nach 2 (7)
+   * nr 3 von 6 (3) nach 3 (6)
+   * nr 4 von 7 (2) nach 4 (5)
+   * nr 5 von 8 (1) nach 5 (4)
+   * nr 6 von 9 (1) nach 6 (3)
+   * nr 7 von 10 (1) nach 7 (2)
+   * nr 8 von 11 (1) nach 8 (1)
+   * nr 9 von 12 (1) nach 9 (1)
+   * nr 10 von 13 (1) nach 10 (1)
+   * nr 11 von 14 (1) nach 11 (1)
+   * calcJoltage( "987654321111111" ) = 987654321111
+   *                                    987654321111
+   * 
+   * 
+   * nr 0 von 3 (1) nach 0 (8)
+   * nr 1 von 4 (1) nach 1 (1)
+   * nr 2 von 5 (1) nach 2 (1)
+   * nr 3 von 6 (1) nach 3 (1)
+   * nr 4 von 7 (1) nach 4 (1)
+   * nr 5 von 8 (1) nach 5 (1)
+   * nr 6 von 9 (1) nach 6 (1)
+   * nr 7 von 10 (1) nach 7 (1)
+   * nr 8 von 11 (1) nach 8 (1)
+   * nr 9 von 12 (1) nach 9 (1)
+   * nr 10 von 13 (1) nach 10 (1)
+   * nr 11 von 14 (9) nach 14 (9)
+   * calcJoltage( "811111111111119" ) = 811111111119
+   *                                    811111111119
+   * nr 0 von 3 (2) nach 2 (4)
+   * nr 1 von 4 (3) nach 4 (3)
+   * nr 2 von 5 (4) nach 5 (4)
+   * nr 3 von 6 (2) nach 6 (2)
+   * nr 4 von 7 (3) nach 7 (3)
+   * nr 5 von 8 (4) nach 8 (4)
+   * nr 6 von 9 (2) nach 9 (2)
+   * nr 7 von 10 (3) nach 10 (3)
+   * nr 8 von 11 (4) nach 11 (4)
+   * nr 9 von 12 (2) nach 12 (2)
+   * nr 10 von 13 (7) nach 13 (7)
+   * nr 11 von 14 (8) nach 14 (8)
+   * calcJoltage( "234234234234278" ) = 434234234278
+   *                                    434234234278
+   * nr 0 von 3 (1) nach 0 (8)
+   * nr 1 von 4 (8) nach 2 (8)
+   * nr 2 von 5 (1) nach 4 (8)
+   * nr 3 von 6 (9) nach 6 (9)
+   * nr 4 von 7 (1) nach 7 (1)
+   * nr 5 von 8 (1) nach 8 (1)
+   * nr 6 von 9 (1) nach 9 (1)
+   * nr 7 von 10 (1) nach 10 (1)
+   * nr 8 von 11 (2) nach 11 (2)
+   * nr 9 von 12 (1) nach 12 (1)
+   * nr 10 von 13 (1) nach 13 (1)
+   * nr 11 von 14 (1) nach 14 (1)
+   * calcJoltage( "818181911112111" ) = 888911112111
+   *                                    888911112111
    */
+
+  public static final BigDecimal BIG_DECIMAL_0  = new BigDecimal( "0" );
+
+  public static final BigDecimal BIG_DECIMAL_10 = new BigDecimal( "10" );
 
   public static void main( String[] args )
   {
@@ -162,14 +226,16 @@ public class Day3Lobby
 
     List< String > test_content_list = Arrays.stream( test_content.split( "," ) ).map( String::trim ).collect( Collectors.toList() );
 
-    checkCalcJoltagePart1( getListProd() );
+    startListCalcJoltage( getListProd(), 2, false );
+    startListCalcJoltage( getListProd(), 12, false );
 
-    checkCalcJoltagePart1( test_content_list );
+    startListCalcJoltage( test_content_list, 2, true );
+    startListCalcJoltage( test_content_list, 12, true );
 
-    startTestCalcJoltage();
+    //startTestCalcJoltage();
   }
 
-  public static void checkCalcJoltagePart1( List< String > pList )
+  public static void startListCalcJoltage( List< String > pList, int pAmountOfNumbers, boolean pKnzDebug )
   {
     if ( pList == null )
     {
@@ -178,134 +244,140 @@ public class Day3Lobby
       return;
     }
 
-    long sum_joltage = 0;
+    BigDecimal sum_joltage = BIG_DECIMAL_0;
 
-    for ( int rotation_list_index = 0; rotation_list_index < pList.size(); rotation_list_index++ )
+    for ( int list_index = 0; list_index < pList.size(); list_index++ )
     {
-      String range_string = pList.get( rotation_list_index );
+      String list_string = pList.get( list_index );
 
-      sum_joltage += testCalcJoltage( range_string );
+      BigDecimal sum_jol2tage = calcJoltage( list_string, pAmountOfNumbers, pKnzDebug );
+
+      sum_joltage = sum_joltage.add( sum_jol2tage );
     }
 
     wl( "" );
-    wl( "sum_joltages " + sum_joltage );
+    wl( "sum_joltages " + sum_joltage.toPlainString() );
     wl( "" );
     wl( "" );
   }
 
   private static void startTestCalcJoltage()
   {
-    testCalcJoltage( "111111111111111119" );
+    calcJoltage( "8119", 2, true );
+    calcJoltage( "987654321111111", 12, true );
+    calcJoltage( "981234567890000000", 12, true );
   }
 
-  private static int testCalcJoltage( String pString )
+  private static BigDecimal calcJoltage( String pString, int pAmountOfNumbers, boolean pKnzDebug )
   {
-    int joltage = calcJoltage( pString );
+    int str_length = pString.length();
 
-    wl( "calcJoltage( \"" + pString + "\" ) = " + joltage );
+    /*
+     * The List is not really neccessary.
+     */
+    List< Integer > indexList = new ArrayList<>();
 
-    return joltage;
-  }
-
-  private static int calcJoltage( String pString )
-  {
-    int joltage = 0;
-
-    if ( pString != null )
+    for ( int i = pAmountOfNumbers; i > 0; i-- )
     {
-      int str_length = pString.length();
+      indexList.add( new Integer( str_length - i ) );
+    }
 
-      int number_act_index = 0;
+    BigDecimal joltage = BIG_DECIMAL_0;
 
-      int number_1_index = -1;
-      int number_1_value = -1;
+    for ( int i = 0; i < indexList.size(); i++ )
+    {
+      int index_previous = ( i > 0 ) ? ( (Integer) indexList.get( i - 1 ) ).intValue() : -1;
 
-      int number_2_index = -1;
-      int number_2_value = -1;
+      int index_current = ( (Integer) indexList.get( i ) ).intValue();
 
-      while ( number_act_index < str_length )
+      int index_calculated = calculateIndex( pString, index_current, index_previous );
+
+      indexList.set( i, new Integer( index_calculated ) );
+
+      int number_1_value = ( (int) pString.charAt( index_calculated ) ) - 48;
+
+      if ( pKnzDebug )
       {
-        /*
-         * Die aktuelle Nummer aus der Eingabe holen 
-         */
-        int number_act_value = ( ( (int) pString.charAt( number_act_index ) ) - 48 );
+        int number_1_start = ( (int) pString.charAt( index_current ) ) - 48;
 
-        /*
-         * Ist die aktuelle Zahl am Leseindex größer als die Zahl am Index 1,
-         * setze die aktuelle Zahl am Leseindex als neue Zahl am Index 1.
-         * 
-         * Sollte die Zahl am Index 2 jedoch kleiner sein, als die aktuelle Zahl am Index 1, 
-         * muss die jetzige Zahl am Index 1 gespeichert werden.
-         * 
-         * Groesser gleich muss es sein, weil in zahl 2 eine kleinere Zahl stehen kann. 
-         */
-
-        /*
-         * Bis zur zweitletzten Position kann noch der erste Index gesetzt werden. 
-         * Der letzte Wert kann nur noch der Index 2 Wert sein.
-         */
-        if ( ( number_act_index < str_length - 1 ) && ( number_act_value >= number_1_value ) )
-        {
-          if ( number_act_value == number_1_value )
-          {
-            number_2_index = number_1_index;
-
-            number_2_value = number_1_value;
-          }
-          else
-          {
-            number_2_index = -1;
-
-            number_2_value = -1;
-          }
-
-          /*
-           * Set the new number 1
-           */
-          number_1_index = number_act_index;
-
-          number_1_value = number_act_value;
-        }
-        else if ( number_act_value >= number_2_value )
-        {
-          /*
-           * We found a higher number for index 2. 
-           * The new number is less than the number 1, but 
-           * heigher than the current number 2.
-           */
-          number_2_index = number_act_index;
-
-          number_2_value = number_act_value;
-        }
-
-        number_act_index++;
+        wl( "nr " + i + " From " + index_current + " (" + number_1_start + ") To " + index_calculated + " (" + number_1_value + ")" );
       }
 
-      if ( number_1_index == number_2_index )
-      {
-        wl( "Fehler Index gleich" );
-      }
+      joltage = joltage.multiply( BIG_DECIMAL_10 ).add( new BigDecimal( number_1_value ) );
+    }
 
-      /*
-       * Es muss ueber den index verglichen werden
-       */
-      if ( number_1_index < number_2_index )
-      {
-        wl( "\nA 1 " + number_1_value + " " + number_1_index );
-        wl( "A 2 " + number_2_value + " " + number_2_index );
-
-        joltage = ( number_1_value * 10 ) + number_2_value;
-      }
-      else
-      {
-        wl( "\nB 2 " + number_2_value + " " + number_2_index );
-        wl( "B 1 " + number_1_value + " " + number_1_index );
-
-        joltage = ( number_2_value * 10 ) + number_1_value;
-      }
+    if ( pKnzDebug )
+    {
+      wl( "calcJoltage( \"" + pString + "\" ) = " + joltage.toPlainString() );
+      wl( "" );
     }
 
     return joltage;
+  }
+
+  private static int calculateIndex( String pString, int pIndexStart, int pIndexEnd )
+  {
+    /*
+     * The value in pIndexEnd is the Index of the previous element and 
+     * must not be included in this search. 
+     * 
+     * Since the search order is from the highest to the lowest Index, 
+     * this search ends one Index to the left.
+     */
+    int end_index_caculated = pIndexEnd + 1;
+
+    /*
+     * If the calculated end index is equal to the start index, than 
+     * the start index can't be moved to another position. 
+     * 
+     * The search for a better position is over. 
+     * The value from the parameter pIndexStart ist returned.
+     */
+    if ( end_index_caculated == pIndexStart )
+    {
+      return pIndexStart;
+    }
+
+    /*
+     * The search for a better position starts one index towards 
+     * the beginning of the string. 
+     * 
+     * If the search index is less than zero, than the start index 
+     * can't be moved to another position. 
+     * 
+     * The search for a better position is over. 
+     * The value from the parameter pIndexStart ist returned.
+     */
+    int index_search = pIndexStart - 1;
+
+    if ( index_search < 0 )
+    {
+      return pIndexStart;
+    }
+
+    int index_result = pIndexStart;
+
+    /*
+     * The start value for the best number, starts with the 
+     * number found at the start index.
+     */
+    int number_best = ( ( (int) pString.charAt( pIndexStart ) ) - 48 );
+
+    while ( index_search >= end_index_caculated )
+    {
+      int number_act_value = ( ( (int) pString.charAt( index_search ) ) - 48 );
+
+      if ( number_act_value >= number_best )
+      {
+        number_best = number_act_value;
+
+        index_result = index_search;
+      }
+
+      index_search--;
+    }
+
+    return index_result;
   }
 
   private static List< String > getListProd()
@@ -341,26 +413,6 @@ public class Day3Lobby
     return zeilenArrays;
   }
 
-  private static List< String > getListProd1()
-  {
-    String datei_input = "/mnt/hd4tbb/daten/zdownload/advent_of_code_2025__day2_input.txt";
-
-    try
-    {
-      String content = Files.readString( Path.of( datei_input ) );
-
-      List< String > list_string = Arrays.stream( content.split( "," ) ).map( String::trim ).collect( Collectors.toList() );
-
-      return list_string;
-    }
-    catch ( IOException error_inst )
-    {
-      error_inst.printStackTrace();
-    }
-
-    return null;
-  }
-
   /**
    * Ausgabe auf System.out
    * 
@@ -370,5 +422,4 @@ public class Day3Lobby
   {
     System.out.println( pString );
   }
-
 }
