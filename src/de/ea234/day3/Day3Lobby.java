@@ -136,20 +136,20 @@ public class Day3Lobby
    * 
    * ------------------------------------------------------------------------
    * 
-   * nr 0 From 13 (1) To 0 (9)
-   * nr 1 From 14 (1) To 1 (8)
+   * Nr 0 From 13 (1) To 0 (9)
+   * Nr 1 From 14 (1) To 1 (8)
    * calcJoltage( "987654321111111" ) = 98
    * 
-   * nr 0 From 13 (1) To 0 (8)
-   * nr 1 From 14 (9) To 14 (9)
+   * Nr 0 From 13 (1) To 0 (8)
+   * Nr 1 From 14 (9) To 14 (9)
    * calcJoltage( "811111111111119" ) = 89
    * 
-   * nr 0 From 13 (7) To 13 (7)
-   * nr 1 From 14 (8) To 14 (8)
+   * Nr 0 From 13 (7) To 13 (7)
+   * Nr 1 From 14 (8) To 14 (8)
    * calcJoltage( "234234234234278" ) = 78
    * 
-   * nr 0 From 13 (1) To 6 (9)
-   * nr 1 From 14 (1) To 11 (2)
+   * Nr 0 From 13 (1) To 6 (9)
+   * Nr 1 From 14 (1) To 11 (2)
    * calcJoltage( "818181911112111" ) = 92
    * 
    * 
@@ -158,65 +158,65 @@ public class Day3Lobby
    * 
    * ------------------------------------------------------------------------
    * 
-   * 
-   * nr 0 von 3 (6) nach 0 (9)
-   * nr 1 von 4 (5) nach 1 (8)
-   * nr 2 von 5 (4) nach 2 (7)
-   * nr 3 von 6 (3) nach 3 (6)
-   * nr 4 von 7 (2) nach 4 (5)
-   * nr 5 von 8 (1) nach 5 (4)
-   * nr 6 von 9 (1) nach 6 (3)
-   * nr 7 von 10 (1) nach 7 (2)
-   * nr 8 von 11 (1) nach 8 (1)
-   * nr 9 von 12 (1) nach 9 (1)
-   * nr 10 von 13 (1) nach 10 (1)
-   * nr 11 von 14 (1) nach 11 (1)
+   * Nr 0 From 3 (6) To 0 (9)
+   * Nr 1 From 4 (5) To 1 (8)
+   * Nr 2 From 5 (4) To 2 (7)
+   * Nr 3 From 6 (3) To 3 (6)
+   * Nr 4 From 7 (2) To 4 (5)
+   * Nr 5 From 8 (1) To 5 (4)
+   * Nr 6 From 9 (1) To 6 (3)
+   * Nr 7 From 10 (1) To 7 (2)
+   * Nr 8 From 11 (1) To 8 (1)
+   * Nr 9 From 12 (1) To 9 (1)
+   * Nr 10 From 13 (1) To 10 (1)
+   * Nr 11 From 14 (1) To 11 (1)
    * calcJoltage( "987654321111111" ) = 987654321111
-   *                                    987654321111
    * 
-   * 
-   * nr 0 von 3 (1) nach 0 (8)
-   * nr 1 von 4 (1) nach 1 (1)
-   * nr 2 von 5 (1) nach 2 (1)
-   * nr 3 von 6 (1) nach 3 (1)
-   * nr 4 von 7 (1) nach 4 (1)
-   * nr 5 von 8 (1) nach 5 (1)
-   * nr 6 von 9 (1) nach 6 (1)
-   * nr 7 von 10 (1) nach 7 (1)
-   * nr 8 von 11 (1) nach 8 (1)
-   * nr 9 von 12 (1) nach 9 (1)
-   * nr 10 von 13 (1) nach 10 (1)
-   * nr 11 von 14 (9) nach 14 (9)
+   * Nr 0 From 3 (1) To 0 (8)
+   * Nr 1 From 4 (1) To 1 (1)
+   * Nr 2 From 5 (1) To 2 (1)
+   * Nr 3 From 6 (1) To 3 (1)
+   * Nr 4 From 7 (1) To 4 (1)
+   * Nr 5 From 8 (1) To 5 (1)
+   * Nr 6 From 9 (1) To 6 (1)
+   * Nr 7 From 10 (1) To 7 (1)
+   * Nr 8 From 11 (1) To 8 (1)
+   * Nr 9 From 12 (1) To 9 (1)
+   * Nr 10 From 13 (1) To 10 (1)
+   * Nr 11 From 14 (9) To 14 (9)
    * calcJoltage( "811111111111119" ) = 811111111119
-   *                                    811111111119
-   * nr 0 von 3 (2) nach 2 (4)
-   * nr 1 von 4 (3) nach 4 (3)
-   * nr 2 von 5 (4) nach 5 (4)
-   * nr 3 von 6 (2) nach 6 (2)
-   * nr 4 von 7 (3) nach 7 (3)
-   * nr 5 von 8 (4) nach 8 (4)
-   * nr 6 von 9 (2) nach 9 (2)
-   * nr 7 von 10 (3) nach 10 (3)
-   * nr 8 von 11 (4) nach 11 (4)
-   * nr 9 von 12 (2) nach 12 (2)
-   * nr 10 von 13 (7) nach 13 (7)
-   * nr 11 von 14 (8) nach 14 (8)
+   * 
+   * Nr 0 From 3 (2) To 2 (4)
+   * Nr 1 From 4 (3) To 4 (3)
+   * Nr 2 From 5 (4) To 5 (4)
+   * Nr 3 From 6 (2) To 6 (2)
+   * Nr 4 From 7 (3) To 7 (3)
+   * Nr 5 From 8 (4) To 8 (4)
+   * Nr 6 From 9 (2) To 9 (2)
+   * Nr 7 From 10 (3) To 10 (3)
+   * Nr 8 From 11 (4) To 11 (4)
+   * Nr 9 From 12 (2) To 12 (2)
+   * Nr 10 From 13 (7) To 13 (7)
+   * Nr 11 From 14 (8) To 14 (8)
    * calcJoltage( "234234234234278" ) = 434234234278
-   *                                    434234234278
-   * nr 0 von 3 (1) nach 0 (8)
-   * nr 1 von 4 (8) nach 2 (8)
-   * nr 2 von 5 (1) nach 4 (8)
-   * nr 3 von 6 (9) nach 6 (9)
-   * nr 4 von 7 (1) nach 7 (1)
-   * nr 5 von 8 (1) nach 8 (1)
-   * nr 6 von 9 (1) nach 9 (1)
-   * nr 7 von 10 (1) nach 10 (1)
-   * nr 8 von 11 (2) nach 11 (2)
-   * nr 9 von 12 (1) nach 12 (1)
-   * nr 10 von 13 (1) nach 13 (1)
-   * nr 11 von 14 (1) nach 14 (1)
+   * 
+   * Nr 0 From 3 (1) To 0 (8)
+   * Nr 1 From 4 (8) To 2 (8)
+   * Nr 2 From 5 (1) To 4 (8)
+   * Nr 3 From 6 (9) To 6 (9)
+   * Nr 4 From 7 (1) To 7 (1)
+   * Nr 5 From 8 (1) To 8 (1)
+   * Nr 6 From 9 (1) To 9 (1)
+   * Nr 7 From 10 (1) To 10 (1)
+   * Nr 8 From 11 (2) To 11 (2)
+   * Nr 9 From 12 (1) To 12 (1)
+   * Nr 10 From 13 (1) To 13 (1)
+   * Nr 11 From 14 (1) To 14 (1)
    * calcJoltage( "818181911112111" ) = 888911112111
-   *                                    888911112111
+   * 
+   * 
+   * sum_joltages 3121910778619
+   * 
    */
 
   public static final BigDecimal BIG_DECIMAL_0  = new BigDecimal( "0" );
@@ -238,7 +238,7 @@ public class Day3Lobby
     //startTestCalcJoltage();
   }
 
-  public static void startListCalcJoltage( List< String > pList, int pAmountOfNumbers, boolean pKnzDebug )
+  public static void startListCalcJoltage( List< String > pList, int pDigitAmount, boolean pKnzDebug )
   {
     if ( pList == null )
     {
@@ -255,9 +255,7 @@ public class Day3Lobby
     {
       String list_string = pList.get( list_index );
 
-      BigDecimal sum_jol2tage = calcJoltage( list_string, pAmountOfNumbers, pKnzDebug );
-
-      sum_joltage = sum_joltage.add( sum_jol2tage );
+      sum_joltage = sum_joltage.add( calcJoltage( list_string, pDigitAmount, pKnzDebug ) );
     }
 
     long time_end = System.currentTimeMillis();
@@ -277,7 +275,7 @@ public class Day3Lobby
     calcJoltage( "987654321111111", 12, true );
   }
 
-  private static BigDecimal calcJoltage( String pString, int pAmountOfNumbers, boolean pKnzDebug )
+  private static BigDecimal calcJoltage( String pString, int pDigitAmount, boolean pKnzDebug )
   {
     int str_length = pString.length();
 
@@ -285,9 +283,9 @@ public class Day3Lobby
 
     int index_previous = -1;
 
-    for ( int i = 0; i < pAmountOfNumbers; i++ )
+    for ( int digit_index = 0; digit_index < pDigitAmount; digit_index++ )
     {
-      int index_current = str_length - ( pAmountOfNumbers - i );
+      int index_current = str_length - ( pDigitAmount - digit_index );
 
       int index_calculated = calculateIndex( pString, index_current, index_previous );
 
@@ -297,7 +295,7 @@ public class Day3Lobby
       {
         int number_1_start = ( (int) pString.charAt( index_current ) ) - 48;
 
-        wl( "nr " + i + " From " + index_current + " (" + number_1_start + ") To " + index_calculated + " (" + number_1_value + ")" );
+        wl( "Nr " + digit_index + " From " + index_current + " (" + number_1_start + ") To " + index_calculated + " (" + number_1_value + ")" );
       }
 
       joltage = joltage.multiply( BIG_DECIMAL_10 ).add( new BigDecimal( number_1_value ) );
