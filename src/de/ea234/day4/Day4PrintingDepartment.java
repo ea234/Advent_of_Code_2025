@@ -389,11 +389,13 @@ public class Day4PrintingDepartment
    * Total removal of paper rolls 43
    */
 
-  private static final char CHAR_PAPER_ROLL   = '@';
+  private static final char CHAR_PAPER_ROLL       = '@';
 
-  private static final char CHAR_EMPTY_SPACE  = '.';
+  private static final char CHAR_EMPTY_SPACE      = '.';
 
-  private static final char CHAR_SPOT_REMOVAL = 'x';
+  private static final char CHAR_SPOT_REMOVAL     = 'x';
+
+  private static final int  NUMBER_OF_PAPER_ROLLS = 3;
 
   public static void main( String[] args )
   {
@@ -496,7 +498,7 @@ public class Day4PrintingDepartment
 
           number_of_adjacent_paper_rolls += calcAdjacentPaperRolls( str_next_line, col_index, true );
 
-          if ( number_of_adjacent_paper_rolls < 4 )
+          if ( number_of_adjacent_paper_rolls <= NUMBER_OF_PAPER_ROLLS )
           {
             removal_positions++;
 
@@ -512,6 +514,7 @@ public class Day4PrintingDepartment
         else
         {
           str_current_position_count += CHAR_EMPTY_SPACE;
+
           str_floor_plan += CHAR_EMPTY_SPACE;
         }
       }
@@ -567,7 +570,7 @@ public class Day4PrintingDepartment
 
           number_of_adjacent_paper_rolls += calcAdjacentPaperRolls( str_next_line, col_index, true );
 
-          if ( number_of_adjacent_paper_rolls < 4 )
+          if ( number_of_adjacent_paper_rolls <= NUMBER_OF_PAPER_ROLLS )
           {
             removal_positions++;
           }
@@ -621,7 +624,7 @@ public class Day4PrintingDepartment
 
           number_of_adjacent_paper_rolls += calcAdjacentPaperRolls( str_next_line, col_index, true );
 
-          if ( number_of_adjacent_paper_rolls < 4 )
+          if ( number_of_adjacent_paper_rolls <= NUMBER_OF_PAPER_ROLLS )
           {
             akt_line += CHAR_EMPTY_SPACE;
           }
