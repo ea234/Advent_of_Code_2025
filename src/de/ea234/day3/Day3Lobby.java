@@ -252,6 +252,7 @@ public class Day3Lobby
    * 
    *  Input     234234234234278          234234234234278
    *  Indexe                 12                       12
+   * 
    */
 
   private static final BigDecimal BIG_DECIMAL_0  = new BigDecimal( "0" );
@@ -337,7 +338,7 @@ public class Day3Lobby
        * 
        * Just for clarification: 
        *    The start-index is greater than the end-index.
-       *    Because the search is done to the start of the string
+       *    Because the search is done from the end to the start of the string
        */
       int index_calculated = calculateIndex( pString, index_start, index_end );
 
@@ -451,33 +452,31 @@ public class Day3Lobby
 
   private static List< String > getListProd()
   {
-    int anzahl_zeilen_gelesen = 0;
+    int row_count = 0;
 
     List< String > zeilenArrays = new ArrayList< String >();
 
     String datei_input = "/mnt/hd4tbb/daten/zdownload/advent_of_code_2025__day3_input.txt";
 
-    try (BufferedReader br = new BufferedReader( new FileReader( datei_input ) ))
+    try (BufferedReader buffered_reader = new BufferedReader( new FileReader( datei_input ) ))
     {
       String zeile;
 
-      while ( ( zeile = br.readLine() ) != null )
+      while ( ( zeile = buffered_reader.readLine() ) != null )
       {
         zeile = zeile.trim();
 
         zeilenArrays.add( zeile );
 
-        anzahl_zeilen_gelesen++;
-
-        wl( "File Row " + zeile );
+        row_count++;
       }
     }
-    catch ( IOException e )
+    catch ( IOException err_inst )
     {
-      e.printStackTrace();
+      err_inst.printStackTrace();
     }
 
-    wl( "File Row Count " + anzahl_zeilen_gelesen + " " + zeilenArrays.size() );
+    wl( "File Row Count " + row_count + " " + zeilenArrays.size() );
 
     return zeilenArrays;
   }

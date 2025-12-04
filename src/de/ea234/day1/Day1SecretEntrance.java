@@ -12,6 +12,9 @@ import de.ea234.util.FkString;
 public class Day1SecretEntrance
 {
   /*
+   *          ____           *                     
+   * ________/O___\__________|________________________
+   *  
    * Advent of Code 2025
    * https://adventofcode.com/2025/day/1
    * 
@@ -452,33 +455,31 @@ public class Day1SecretEntrance
 
   private static List< String > getListProd()
   {
-    int anzahl_zeilen_gelesen = 0;
+    int row_count = 0;
 
     List< String > zeilenArrays = new ArrayList< String >();
 
     String datei_input = "/mnt/hd4tbb/daten/zdownload/advent_of_code_2025__day1_input.txt";
 
-    try (BufferedReader br = new BufferedReader( new FileReader( datei_input ) ))
+    try (BufferedReader buffered_reader = new BufferedReader( new FileReader( datei_input ) ))
     {
       String zeile;
 
-      while ( ( zeile = br.readLine() ) != null )
+      while ( ( zeile = buffered_reader.readLine() ) != null )
       {
         zeile = zeile.trim();
 
         zeilenArrays.add( zeile );
 
-        anzahl_zeilen_gelesen++;
-
-        wl( "File Row " + zeile );
+        row_count++;
       }
     }
-    catch ( IOException e )
+    catch ( IOException err_inst )
     {
-      e.printStackTrace();
+      err_inst.printStackTrace();
     }
 
-    wl( "File Row Count " + anzahl_zeilen_gelesen + " " + zeilenArrays.size() );
+    wl( "File Row Count " + row_count + " " + zeilenArrays.size() );
 
     return zeilenArrays;
   }
