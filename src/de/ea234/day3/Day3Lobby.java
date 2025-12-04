@@ -134,21 +134,22 @@ public class Day3Lobby
    * 
    * ------------------------------------------------------------------------
    * 
-   * A 1 9 0
-   * A 2 8 1
+   * nr 0 From 13 (1) To 0 (9)
+   * nr 1 From 14 (1) To 1 (8)
    * calcJoltage( "987654321111111" ) = 98
    * 
-   * A 1 8 0
-   * A 2 9 14
+   * nr 0 From 13 (1) To 0 (8)
+   * nr 1 From 14 (9) To 14 (9)
    * calcJoltage( "811111111111119" ) = 89
    * 
-   * A 1 7 13
-   * A 2 8 14
+   * nr 0 From 13 (7) To 13 (7)
+   * nr 1 From 14 (8) To 14 (8)
    * calcJoltage( "234234234234278" ) = 78
    * 
-   * A 1 9 6
-   * A 2 2 11
+   * nr 0 From 13 (1) To 6 (9)
+   * nr 1 From 14 (1) To 11 (2)
    * calcJoltage( "818181911112111" ) = 92
+   * 
    * 
    * sum_joltages 357
    * 
@@ -331,7 +332,7 @@ public class Day3Lobby
      * the start index can't be moved to another position. 
      * 
      * The search for a better position is over. 
-     * The value from the parameter pIndexStart ist returned.
+     * The value from the parameter pIndexStart is returned.
      */
     if ( end_index_caculated == pIndexStart )
     {
@@ -346,7 +347,7 @@ public class Day3Lobby
      * can't be moved to another position. 
      * 
      * The search for a better position is over. 
-     * The value from the parameter pIndexStart ist returned.
+     * The value from the parameter pIndexStart is returned.
      */
     int index_search = pIndexStart - 1;
 
@@ -355,21 +356,29 @@ public class Day3Lobby
       return pIndexStart;
     }
 
+    /*
+     * The function result is initially set to the start-position.
+     */
     int index_result = pIndexStart;
 
     /*
      * The start value for the best number, starts with the 
      * number found at the start index.
      */
-    int number_best = ( ( (int) pString.charAt( pIndexStart ) ) - 48 );
+    int number_best_value = ( ( (int) pString.charAt( pIndexStart ) ) - 48 );
 
+    /*
+     * Searching a better value.
+     * The better value, can be higher then the current value, or it 
+     * can be a better index-position in the string (if the values are equal).
+     */
     while ( index_search >= end_index_caculated )
     {
       int number_act_value = ( ( (int) pString.charAt( index_search ) ) - 48 );
 
-      if ( number_act_value >= number_best )
+      if ( number_act_value >= number_best_value )
       {
-        number_best = number_act_value;
+        number_best_value = number_act_value;
 
         index_result = index_search;
       }
