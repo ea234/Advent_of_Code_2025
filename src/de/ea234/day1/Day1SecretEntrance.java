@@ -17,6 +17,7 @@ public class Day1SecretEntrance
    *  
    * Advent of Code 2025
    * https://adventofcode.com/2025/day/1
+   * https://www.youtube.com/watch?v=rdfJMNSESnE
    * 
    *  --- Day 1: Secret Entrance ---
    * 

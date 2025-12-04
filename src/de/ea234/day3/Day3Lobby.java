@@ -16,6 +16,7 @@ public class Day3Lobby
   /*
    * --- Day 3: Lobby ---
    * https://adventofcode.com/2025/day/3
+   * https://www.youtube.com/watch?v=0m7k3HAWx3w
    *
    * You descend a short staircase, enter the surprisingly
    * vast lobby, and are quickly cleared by the security checkpoint.
@@ -326,13 +327,14 @@ public class Day3Lobby
      */
     int index_end = -1;
 
+    /*
+     * The first start-index is the length of the input minus the digit amount.
+     * The index_start will be increased each round and moves towards the string end. 
+     */
+    int index_start = str_length - pDigitAmount;
+
     for ( int digit_index = 0; digit_index < pDigitAmount; digit_index++ )
     {
-      /*
-       * Calculate the start-index-position for the n-th digit
-       */
-      int index_start = str_length - ( pDigitAmount - digit_index );
-
       /*
        * Try to find a new better index within the input.
        * 
@@ -366,6 +368,11 @@ public class Day3Lobby
        * The next end-index will end before the index, calculated here.
        */
       index_end = index_calculated;
+
+      /*
+       * Increment the start-index for the next digit.
+       */
+      index_start++;
     }
 
     if ( pKnzDebug )

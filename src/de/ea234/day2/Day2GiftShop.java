@@ -13,6 +13,7 @@ public class Day2GiftShop
   /*
    * --- Day 2: Gift Shop ---
    * https://adventofcode.com/2025/day/2
+   * https://www.youtube.com/watch?v=bPMhQiVn6KI
    *
    * You get inside and take the elevator to its only other stop: the gift shop. "Thank
    * you for visiting the North Pole!" gleefully exclaims a nearby sign. You aren't sure
@@ -340,20 +341,20 @@ public class Day2GiftShop
 
       int range_value_str_mitte = (int) range_value_str_len / 2;
 
-      int index_end_muster = range_value_str_mitte;
+      int index_end_pattern = range_value_str_mitte;
 
       /*
        * pattern_count does not include the first occurance of the pattern 
        */
       int pattern_count = 0;
 
-      while ( ( index_end_muster >= 0 ) && ( pattern_count == 0 ) )
+      while ( ( index_end_pattern >= 0 ) && ( pattern_count == 0 ) )
       {
-        pattern_count = countPattenOccurence( range_value_str, index_end_muster );
+        pattern_count = countPattenOccurence( range_value_str, index_end_pattern );
 
         if ( pattern_count == 0 )
         {
-          index_end_muster--;
+          index_end_pattern--;
         }
       }
 
