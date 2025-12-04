@@ -587,7 +587,7 @@ public class Day4PrintingDepartment
       return null;
     }
 
-    List< String > zeilenArrays = new ArrayList< String >();
+    List< String > string_array = new ArrayList< String >();
 
     for ( int list_index = 0; list_index < pList.size(); list_index++ )
     {
@@ -636,10 +636,10 @@ public class Day4PrintingDepartment
         }
       }
 
-      zeilenArrays.add( akt_line );
+      string_array.add( akt_line );
     }
 
-    return zeilenArrays;
+    return string_array;
   }
 
   private static int calcAdjacentPaperRolls( String pString, int pIndexPosition, boolean pKnzCountCenterPosition )
@@ -679,7 +679,7 @@ public class Day4PrintingDepartment
   {
     int row_count = 0;
 
-    List< String > zeilenArrays = new ArrayList< String >();
+    List< String > string_array = new ArrayList< String >();
 
     String datei_input = "/mnt/hd4tbb/daten/zdownload/advent_of_code_2025__day4_input.txt";
 
@@ -691,7 +691,7 @@ public class Day4PrintingDepartment
       {
         zeile = zeile.trim();
 
-        zeilenArrays.add( zeile );
+        string_array.add( zeile );
 
         row_count++;
       }
@@ -701,9 +701,9 @@ public class Day4PrintingDepartment
       err_inst.printStackTrace();
     }
 
-    wl( "File Row Count " + row_count + " " + zeilenArrays.size() );
+    wl( "File Row Count " + row_count + " " + string_array.size() );
 
-    return zeilenArrays;
+    return string_array;
   }
 
   /**

@@ -458,7 +458,7 @@ public class Day1SecretEntrance
   {
     int row_count = 0;
 
-    List< String > zeilenArrays = new ArrayList< String >();
+    List< String > string_array = new ArrayList< String >();
 
     String datei_input = "/mnt/hd4tbb/daten/zdownload/advent_of_code_2025__day1_input.txt";
 
@@ -470,7 +470,7 @@ public class Day1SecretEntrance
       {
         zeile = zeile.trim();
 
-        zeilenArrays.add( zeile );
+        string_array.add( zeile );
 
         row_count++;
       }
@@ -480,9 +480,9 @@ public class Day1SecretEntrance
       err_inst.printStackTrace();
     }
 
-    wl( "File Row Count " + row_count + " " + zeilenArrays.size() );
+    wl( "File Row Count " + row_count + " " + string_array.size() );
 
-    return zeilenArrays;
+    return string_array;
   }
 
   /**
