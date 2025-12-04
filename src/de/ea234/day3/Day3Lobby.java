@@ -11,6 +11,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import de.ea234.util.FkSystem;
+
 public class Day3Lobby
 {
   /*
@@ -245,6 +247,8 @@ public class Day3Lobby
       return;
     }
 
+    long time_start = System.currentTimeMillis();
+
     BigDecimal sum_joltage = BIG_DECIMAL_0;
 
     for ( int list_index = 0; list_index < pList.size(); list_index++ )
@@ -256,9 +260,14 @@ public class Day3Lobby
       sum_joltage = sum_joltage.add( sum_jol2tage );
     }
 
+    long time_end = System.currentTimeMillis();
+
+    long time_diff = time_end - time_start;
+
     wl( "" );
     wl( "sum_joltages " + sum_joltage.toPlainString() );
     wl( "" );
+    wl( "Runtime " + pList.size() + " Input Lines = " + FkSystem.getDebugRuntime( time_diff ) );
     wl( "" );
   }
 
@@ -266,34 +275,21 @@ public class Day3Lobby
   {
     calcJoltage( "8119", 2, true );
     calcJoltage( "987654321111111", 12, true );
-    calcJoltage( "981234567890000000", 12, true );
   }
 
   private static BigDecimal calcJoltage( String pString, int pAmountOfNumbers, boolean pKnzDebug )
   {
     int str_length = pString.length();
 
-    /*
-     * The List is not really neccessary.
-     */
-    List< Integer > indexList = new ArrayList<>();
-
-    for ( int i = pAmountOfNumbers; i > 0; i-- )
-    {
-      indexList.add( new Integer( str_length - i ) );
-    }
-
     BigDecimal joltage = BIG_DECIMAL_0;
 
-    for ( int i = 0; i < indexList.size(); i++ )
-    {
-      int index_previous = ( i > 0 ) ? ( (Integer) indexList.get( i - 1 ) ).intValue() : -1;
+    int index_previous = -1;
 
-      int index_current = ( (Integer) indexList.get( i ) ).intValue();
+    for ( int i = 0; i < pAmountOfNumbers; i++ )
+    {
+      int index_current = str_length - ( pAmountOfNumbers - i );
 
       int index_calculated = calculateIndex( pString, index_current, index_previous );
-
-      indexList.set( i, new Integer( index_calculated ) );
 
       int number_1_value = ( (int) pString.charAt( index_calculated ) ) - 48;
 
@@ -305,6 +301,8 @@ public class Day3Lobby
       }
 
       joltage = joltage.multiply( BIG_DECIMAL_10 ).add( new BigDecimal( number_1_value ) );
+
+      index_previous = index_calculated;
     }
 
     if ( pKnzDebug )
