@@ -4,8 +4,6 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.math.BigDecimal;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -217,6 +215,43 @@ public class Day3Lobby
    * 
    * sum_joltages 3121910778619
    * 
+   * 
+   * ------------------------------------------------------------------------
+   * How it works 
+   * ------------------------------------------------------------------------
+   * 
+   * The main approach is that the result must be searched for from back to front.
+   * 
+   * In the worst case, the desired sequence of numbers is found at the end of the input.
+   * 
+   * Therefore, the start positions are placed at end of the input.
+   * 
+   * For each digit improvements are searched to the beginning of the string.
+   * 
+   * For the first digit, improvements are searched up to index 0.
+   * The second digit searches for improvements up to the index of the first position.
+   * 
+   * Each improvement found must not be lower than the index of the preceding position.
+   * 
+   * Each improvement found for a position ends before the index of the preceding position.
+   * 
+   * An improvement represents a higher digit.
+   * 
+   * Another improvement is the same digit, but further forward in the input.
+   * 
+   *            Start                    End
+   *  Input     818181911112111          818181911112111
+   *  Indexe                 12                1    2
+   *
+   *            Start                    End
+   *  Input     118191117111311          118191117111311
+   *  Indexe                123              1   2   3
+   *  
+   * It is not possible to create an improvement for a successor index if the
+   * predecessor index is directly before the index of the current position.
+   * 
+   *  Input     234234234234278          234234234234278
+   *  Indexe                 12                       12
    */
 
   public static final BigDecimal BIG_DECIMAL_0  = new BigDecimal( "0" );
@@ -273,6 +308,8 @@ public class Day3Lobby
   {
     calcJoltage( "8119", 2, true );
     calcJoltage( "987654321111111", 12, true );
+    calcJoltage( "111111111111111", 3, true );
+    calcJoltage( "118191117111311", 3, true );
   }
 
   private static BigDecimal calcJoltage( String pString, int pDigitAmount, boolean pKnzDebug )
@@ -281,26 +318,53 @@ public class Day3Lobby
 
     BigDecimal joltage = BIG_DECIMAL_0;
 
-    int index_previous = -1;
+    /*
+     * The first search will be done until index-position 0.
+     * Because this index will be increased by 1 in the function
+     * calculateIndex, the start-value must be -1. 
+     */
+    int index_end = -1;
 
     for ( int digit_index = 0; digit_index < pDigitAmount; digit_index++ )
     {
-      int index_current = str_length - ( pDigitAmount - digit_index );
+      /*
+       * Calculate the start-index-position for the n-th digit
+       */
+      int index_start = str_length - ( pDigitAmount - digit_index );
 
-      int index_calculated = calculateIndex( pString, index_current, index_previous );
+      /*
+       * Try to find a new better index within the input.
+       * 
+       * Just for clarification: 
+       *    The start-index is greater than the end-index.
+       *    Because the search is done to the start of the string
+       */
+      int index_calculated = calculateIndex( pString, index_start, index_end );
 
-      int number_1_value = ( (int) pString.charAt( index_calculated ) ) - 48;
+      /*
+       * Get the number at the calculated position
+       */
+      int number_at_index_calculated = ( (int) pString.charAt( index_calculated ) ) - 48;
 
+      /*
+       * Add up the total sum of the joltage
+       */
+      joltage = joltage.multiply( BIG_DECIMAL_10 ).add( new BigDecimal( number_at_index_calculated ) );
+
+      /*
+       * If debug is enabled, some debug-info ist printed
+       */
       if ( pKnzDebug )
       {
-        int number_1_start = ( (int) pString.charAt( index_current ) ) - 48;
+        int number_1_start = ( (int) pString.charAt( index_start ) ) - 48;
 
-        wl( "Nr " + digit_index + " From " + index_current + " (" + number_1_start + ") To " + index_calculated + " (" + number_1_value + ")" );
+        wl( "Nr " + digit_index + " From " + index_start + " (" + number_1_start + ") To " + index_calculated + " (" + number_at_index_calculated + ")" );
       }
 
-      joltage = joltage.multiply( BIG_DECIMAL_10 ).add( new BigDecimal( number_1_value ) );
-
-      index_previous = index_calculated;
+      /*
+       * The next end-index will end before the index, calculated here.
+       */
+      index_end = index_calculated;
     }
 
     if ( pKnzDebug )

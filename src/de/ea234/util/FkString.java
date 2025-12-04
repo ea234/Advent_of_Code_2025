@@ -3,9 +3,6 @@ package de.ea234.util;
 import java.math.BigDecimal;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.Properties;
-import java.util.Random;
-import java.util.Vector;
 
 /**
  * <pre>
