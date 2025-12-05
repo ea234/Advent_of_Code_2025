@@ -103,7 +103,49 @@ public class Day3Lobby
    * An improvement represents a higher digit.
    * 
    * Another improvement is the same digit, but further forward in the input.
+   *
    * 
+   * Loesung:
+   * Es muss von hinten nach vorne gesucht werden. 
+   * 
+   * Im schlechtestem Fall ist die gesuchte Reihenfolge am Ende zu finden. 
+   * 
+   * Daher startet die Suche nach der Reihenfolge von hinten. 
+   * 
+   * Es muss sich ein virtuelles Array fuer die Speicherung der Indexpositionen erdacht werden. 
+   * Dieses Array hat genau die Laenge der gewuenschten Anzahl von Batterien, welche zusammengeschlossen werden sollen.
+   * 
+   * Ausgehend von der ersten Zahl (hoechste Stelle in der Zielzahl), werden 
+   * Verbesserungen zum Stringanfang hin gesucht.
+   * 
+   * Der Startwert ist gleich dem Wert, welcher an der aktuellen Startposition gefunden wird.
+   * 
+   * Verbesserungen koennen zwei Dinge sein:
+   *    1. eine hoehere Ziffer als die aktuelle
+   *    2. die gleiche Ziffer, nur weiter vorne im String.
+   *       Das bewirkt, dass fuer nachfolgene Verbesserungen "Platz" geschaffen wird.
+   *       
+   * Wird eine Verbesserung gefunden, wird der entsprechende Index im Array vermerkt.
+   * 
+   * Die Suche nach einer Verbesserung ist beendet, wenn der Endindex erreicht wird. 
+   * 
+   * Der Endindex ist fuer das erste Element gleich der Index-Position 0 im Eingabestring. 
+   * Fuer den zweiten Index kann es nur eine Indexposition frueher als die vorhergehende 
+   * Position sein.
+   * 
+   * Dadurch vermindern sich die Anzahl der Vergleiche. 
+   * 
+   * Liegt ein Endindex genau eine Position vor dem Startindex der aktuellen Position, 
+   * kann keine Verbesserung mehr erzielt werden. Der Startindex ist in diesem Fall 
+   * auch gleich der Positon der besten Position.
+   * 
+   * Eine Verbesserung kann nicht gefunden werden, wenn der Startindex -1 kleiner 0 ist.
+   * Dann steht der Index schon auf der ersten String-Position. Die Position kann nicht 
+   * mehr geaendert werden. 
+   * 
+   * Es gab mal eine Liste mit den Array-Indexen. 
+   * Diese Liste ist aber nicht wirklich notwendig, da sich die Positionen errechnen lassen.
+     * 
    *            Start                    End
    *  Input     818181911112111          818181911112111
    *  Indexe                 12                1    2
