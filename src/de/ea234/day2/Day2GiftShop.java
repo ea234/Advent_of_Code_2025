@@ -122,10 +122,8 @@ public class Day2GiftShop
 
     BigDecimal sum_ranges = BIG_DECIMAL_0;
 
-    for ( int list_index = 0; list_index < pListIdRanges.size(); list_index++ )
+    for ( String list_string : pListIdRanges )
     {
-      String list_string = pListIdRanges.get( list_index );
-
       sum_ranges = sum_ranges.add( checkRangePart1( list_string ) );
     }
 
@@ -209,10 +207,8 @@ public class Day2GiftShop
 
     BigDecimal sum_ranges = new BigDecimal( 0 );
 
-    for ( int list_index = 0; list_index < pListIdRanges.size(); list_index++ )
+    for ( String list_string : pListIdRanges )
     {
-      String list_string = pListIdRanges.get( list_index );
-
       sum_ranges = sum_ranges.add( checkRangePart2( list_string ) );
     }
 

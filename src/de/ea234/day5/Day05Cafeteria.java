@@ -136,10 +136,8 @@ public class Day05Cafeteria
 
     BigDecimal count_product_ids_valid = BIG_DECIMAL_0;
 
-    for ( int range_index = 0; range_index < range_list.size(); range_index++ )
+    for ( Day5Range range_current : range_list )
     {
-      Day5Range range_current = range_list.get( range_index );
-
       wl( "Range " + range_current.toString() );
 
       count_product_ids_valid = count_product_ids_valid.add( range_current.getRangeValues() );
@@ -179,10 +177,8 @@ public class Day05Cafeteria
         wl( "Reducing " + loop_count );
       }
 
-      for ( int range_index_for_loop = 0; range_index_for_loop < range_list_old.size(); range_index_for_loop++ )
+      for ( Day5Range range_from_old_list : range_list_old )
       {
-        Day5Range range_from_old_list = range_list_old.get( range_index_for_loop );
-
         int range_status = KNZ_RANGE_STATUS_NEW;
 
         int range_index_while = 0;

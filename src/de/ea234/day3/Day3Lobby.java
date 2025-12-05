@@ -152,10 +152,8 @@ public class Day3Lobby
 
     BigDecimal sum_joltage = BIG_DECIMAL_0;
 
-    for ( int list_index = 0; list_index < pList.size(); list_index++ )
+    for ( String list_string : pList )
     {
-      String list_string = pList.get( list_index );
-
       sum_joltage = sum_joltage.add( calcJoltage( list_string, pDigitAmount, pKnzDebug ) );
     }
 
@@ -239,6 +237,7 @@ public class Day3Lobby
        * Increment the start-index for the next digit.
        */
       index_start++;
+      
     }
 
     if ( pKnzDebug )
