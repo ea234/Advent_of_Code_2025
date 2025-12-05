@@ -352,10 +352,12 @@ public class Day3Lobby
       /*
        * Add up the total sum of the joltage
        */
-      joltage = joltage.multiply( BIG_DECIMAL_10 ).add( new BigDecimal( number_at_index_calculated ) );
+      //joltage = joltage.multiply( BIG_DECIMAL_10 ).add( BigDecimal.valueOf( number_at_index_calculated ) );
+      
+      joltage = joltage.multiply( BIG_DECIMAL_10 ).add( new BigDecimal( number_at_index_calculated ) ); // Faster Version
 
       /*
-       * If debug is enabled, some debug-info ist printed
+       * If debug is enabled, some debug-info is printed
        */
       if ( pKnzDebug )
       {
