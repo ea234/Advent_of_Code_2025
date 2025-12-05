@@ -21,7 +21,6 @@ public class Day1SecretEntrance
    *    43 C
    *    4B K
    * 
-   * 
    * ------------------------------------------------------------------------
    * 
    *  Nr. 0 L68    L From   50 To   82    -18  Zero-Flag true    1  1
@@ -96,8 +95,8 @@ public class Day1SecretEntrance
     /*
      * String-Values from the rotation-sequenze-list 
      */
-    String rotation_direction = "+";
-    String rotation_length_string = "";
+    String rotation_direction     = "+";
+    String rotation_length_string =  "";
 
     /*
      * The length of the rotation from the list
@@ -137,13 +136,10 @@ public class Day1SecretEntrance
 
     boolean sum_zero_positions_during_rotation_knz = false;
 
-    for ( int rotation_list_index = 0; rotation_list_index < pListRotationSequenzes.size(); rotation_list_index++ )
+    int rotation_list_index = 0;
+    
+    for ( String rotation_code : pListRotationSequenzes )
     {
-      /*
-       * Get the rotation sequenze from list9371
-       */
-      String rotation_code = pListRotationSequenzes.get( rotation_list_index );
-
       /*
        * Get rotation direction from string
        */
@@ -282,6 +278,8 @@ public class Day1SecretEntrance
       dial_pointer_current_math = dial_pointer_current_corr;
 
       dial_pointer_old = dial_pointer_current_corr;
+      
+      rotation_list_index++;
     }
 
     wl( "" );
