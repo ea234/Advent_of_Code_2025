@@ -13,7 +13,7 @@ public class Day4PrintingDepartment
   /*
    * --- Day 4: Printing Department ---
    * https://adventofcode.com/2025/day/4
-   * 
+   * https://www.youtube.com/watch?v=dIsX74AV-XI&pp=0gcJCSMKAYcqIYzv
    * Total removal of paper rolls 43
    */
 
