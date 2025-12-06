@@ -15,6 +15,8 @@ public class Day06TrashCompactor
   * --- Day 6: Trash Compactor ---
   * https://adventofcode.com/2025/day/6
   * 
+  * https://www.reddit.com/r/adventofcode/comments/1pfguxk/2025_day_6_solutions/
+  * 
   *
   * Result Part 1 7098065460541
   * Result Part 2 13807151830618
@@ -95,7 +97,7 @@ public class Day06TrashCompactor
     calcPart2( test_content_list, true );
   }
 
-  public static void calcPart2( List< String > pList, boolean pKnzDebug )
+  private static void calcPart2( List< String > pList, boolean pKnzDebug )
   {
     int input_index_last_line = pList.size() - 1;
 
@@ -187,7 +189,7 @@ public class Day06TrashCompactor
     wl( "Result Part 2 " + result.toPlainString() );
   }
 
-  public static void calcPart1( List< String > pList, boolean pKnzDebug )
+  private static void calcPart1( List< String > pList, boolean pKnzDebug )
   {
     int input_index_last_line = pList.size() - 1;
     int input_index_current_line = 0;

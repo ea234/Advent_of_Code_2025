@@ -141,7 +141,7 @@ public class Day06Accumulator
    * @param pVorgabe eine Instanz von BigDecimal welche im Fehlerfall zurueckgegeben wird
    * @return eine Instanz von BigDecimal mit dem Wert aus pText oder pVorgabe-Instanz
    */
-  public static BigDecimal getBigDecimal( String pText, BigDecimal pVorgabe )
+  private static BigDecimal getBigDecimal( String pText, BigDecimal pVorgabe )
   {
     try
     {
