@@ -22,38 +22,62 @@ public class Day06TrashCompactor
   * 
   * ------------------------------------------------------------------------
   * 
+  * ------------------------------------------------------------------------
+  * 
   * Setting up Accumulators
   * 
-  * Aufgabe nr 0 Modus 3 1 Aufgabe *
-  * Aufgabe nr 1 Modus 1 0 Aufgabe +
-  * Aufgabe nr 2 Modus 3 1 Aufgabe *
-  * Aufgabe nr 3 Modus 1 0 Aufgabe +
-  * 123 328 51 64 
+  * Task nr 0 from -1 to -1 (1) Modus 3 1 = *
+  * Task nr 1 from -1 to -1 (1) Modus 1 0 = +
+  * Task nr 2 from -1 to -1 (1) Modus 3 1 = *
+  * Task nr 3 from -1 to -1 (1) Modus 1 0 = +
   * 
-  * Addint Input from line 0
   * 
-  * Aufgabe nr 0 Modus 3 123 Aufgabe *,123
-  * Aufgabe nr 1 Modus 1 328 Aufgabe +,328
-  * Aufgabe nr 2 Modus 3 51 Aufgabe *,51
-  * Aufgabe nr 3 Modus 1 64 Aufgabe +,64
-  *  45 64 387 23 
+  * Processing Input from index 0
   * 
-  * Addint Input from line 1
+  * Input "123 328  51 64 "
   * 
-  * Aufgabe nr 0 Modus 3 5535 Aufgabe *,123,45
-  * Aufgabe nr 1 Modus 1 392 Aufgabe +,328,64
-  * Aufgabe nr 2 Modus 3 19737 Aufgabe *,51,387
-  * Aufgabe nr 3 Modus 1 87 Aufgabe +,64,23
-  *  6 98 215 314 
+  * Task nr 0 from -1 to -1 (1) Modus 3 123 = *,123
+  * Task nr 1 from -1 to -1 (1) Modus 1 328 = +,328
+  * Task nr 2 from -1 to -1 (1) Modus 3 51 = *,51
+  * Task nr 3 from -1 to -1 (1) Modus 1 64 = +,64
   * 
-  * Addint Input from line 2
   * 
-  * Aufgabe nr 0 Modus 3 33210 Aufgabe *,123,45,6
-  * Aufgabe nr 1 Modus 1 490 Aufgabe +,328,64,98
-  * Aufgabe nr 2 Modus 3 4243455 Aufgabe *,51,387,215
-  * Aufgabe nr 3 Modus 1 401 Aufgabe +,64,23,314
+  * Processing Input from index 1
+  * 
+  * Input " 45 64  387 23 "
+  * 
+  * Task nr 0 from -1 to -1 (1) Modus 3 5535 = *,123,45
+  * Task nr 1 from -1 to -1 (1) Modus 1 392 = +,328,64
+  * Task nr 2 from -1 to -1 (1) Modus 3 19737 = *,51,387
+  * Task nr 3 from -1 to -1 (1) Modus 1 87 = +,64,23
+  * 
+  * 
+  * Processing Input from index 2
+  * 
+  * Input "  6 98  215 314"
+  * 
+  * Task nr 0 from -1 to -1 (1) Modus 3 33210 = *,123,45,6
+  * Task nr 1 from -1 to -1 (1) Modus 1 490 = +,328,64,98
+  * Task nr 2 from -1 to -1 (1) Modus 3 4243455 = *,51,387,215
+  * Task nr 3 from -1 to -1 (1) Modus 1 401 = +,64,23,314
   * 
   * Result Part 1 4277556
+  * 
+  * ------------------------------------------------------------------------
+  * 
+  * Setting up Accumulators
+  * 
+  * Number of Accumulators 4
+  * 
+  * Adding Input-Lines to Accumulators
+  * 
+  * Task nr 1 from 0 to 3 (4) Modus 3 8544 = *,356,24,1
+  * Task nr 2 from 4 to 7 (4) Modus 1 625 = +,8,248,369
+  * Task nr 3 from 8 to 11 (4) Modus 3 3253600 = *,175,581,32
+  * Task nr 4 from 12 to 14 (3) Modus 1 1058 = +,4,431,623
+  * 
+  * Result Part 2 3263827
+  * 
   */
 
   public static void main( String[] args )
@@ -125,8 +149,6 @@ public class Day06TrashCompactor
      * of the first input line.
      */
     String first_input_line = pList.get( 0 );
-
-    wl( "+ Accumulator " + column_start + " = " + first_input_line.length() + " " + last_line_string.length() );
 
     count_nr_accumulators++;
 

@@ -5,34 +5,35 @@ import java.util.List;
 
 public class Day06Accumulator
 {
+  private static final int FLAG_NO_NUMBER_FOUND = 0;
 
-  private static final int  FLAG_NO_NUMBER_FOUND = 0;
-  private static final int  FLAG_NUMBER_FOUND = 1;
-  
-  private static final int        MOD_UNDEFINED = 0;
+  private static final int FLAG_NUMBER_FOUND    = 1;
 
-  private static final int        MOD_ADD       = 1;
+  private static final int MOD_UNDEFINED        = 0;
 
-  private static final int        MOD_MUL       = 3;
+  private static final int MOD_ADD              = 1;
 
-  private int                     m_index_nr    = 0;
+  private static final int MOD_MUL              = 3;
 
-  private int                     m_index_von   = 0;
+  private int              m_modus              = MOD_UNDEFINED;
 
-  private int                     m_index_bis   = 0;
+  private int              m_index_nr           = 0;                    // for part 2
 
-  private int                     m_modus       = MOD_UNDEFINED;
+  private int              m_index_from         = 0;                    // for part 2
 
-  private String                  m_aufgabe     = "";
+  private int              m_index_to           = 0;
 
-  private BigDecimal              m_accumulator = new BigDecimal( "0" );
+  private String           m_aufgabe            = "";
+
+  private BigDecimal       m_accumulator_value  = new BigDecimal( "0" );
 
   public Day06Accumulator( int pIndexNr, String pModus, int pIndexVon, int pIndexBis )
   {
     m_index_nr = pIndexNr;
 
-    m_index_von = pIndexVon;
-    m_index_bis = pIndexBis;
+    m_index_from = pIndexVon;
+
+    m_index_to = pIndexBis;
 
     if ( pModus != null )
     {
@@ -48,18 +49,21 @@ public class Day06Accumulator
 
         m_aufgabe = "*";
 
-        m_accumulator = new BigDecimal( "1" );
+        /*
+         * The start-value must be 1, because if it is 0, you would get 0 as endresult.
+         */
+        m_accumulator_value = new BigDecimal( "1" );
       }
     }
   }
 
   public void calcInputList( List< String > pList )
   {
-    for ( int col_nr = m_index_bis; col_nr >= m_index_von; col_nr-- )
+    for ( int column_index = m_index_to; column_index >= m_index_from; column_index-- )
     {
       String current_nr_input = "";
 
-      int flag_found_number = FLAG_NO_NUMBER_FOUND;
+      int flag_parser_status = FLAG_NO_NUMBER_FOUND;
 
       int input_index_current_line = 0;
 
@@ -69,16 +73,16 @@ public class Day06Accumulator
 
         char current_char = ' ';
 
-        if ( current_input_line.length() >= col_nr )
+        if ( current_input_line.length() >= column_index )
         {
-          current_char = current_input_line.charAt( col_nr );
+          current_char = current_input_line.charAt( column_index );
         }
 
         if ( ( current_char >= '0' ) && ( current_char <= '9' ) )
         {
           current_nr_input += current_char;
 
-          flag_found_number = FLAG_NUMBER_FOUND;
+          flag_parser_status = FLAG_NUMBER_FOUND;
         }
         else if ( current_char == ' ' )
         {
@@ -92,16 +96,11 @@ public class Day06Accumulator
         input_index_current_line++;
       }
 
-      if ( flag_found_number == FLAG_NUMBER_FOUND )
+      if ( flag_parser_status == FLAG_NUMBER_FOUND )
       {
         addInput( current_nr_input );
       }
     }
-  }
-
-  public String toString()
-  {
-    return "Aufgabe nr " + m_index_nr + " from " + m_index_von + " to " + m_index_bis + " (" + ( ( m_index_bis - m_index_von ) + 1 ) + ") Modus " + m_modus + " " + m_accumulator.toPlainString() + " Aufgabe " + m_aufgabe;
   }
 
   public void addInput( String pInputString )
@@ -114,11 +113,11 @@ public class Day06Accumulator
 
       if ( m_modus == MOD_ADD )
       {
-        m_accumulator = m_accumulator.add( bd_input );
+        m_accumulator_value = m_accumulator_value.add( bd_input );
       }
       else if ( m_modus == MOD_MUL )
       {
-        m_accumulator = m_accumulator.multiply( bd_input );
+        m_accumulator_value = m_accumulator_value.multiply( bd_input );
       }
     }
     else
@@ -129,7 +128,12 @@ public class Day06Accumulator
 
   public BigDecimal getAccumulatorValue()
   {
-    return m_accumulator;
+    return m_accumulator_value;
+  }
+
+  public String toString()
+  {
+    return "Task nr " + m_index_nr + " from " + m_index_from + " to " + m_index_to + " (" + ( ( m_index_to - m_index_from ) + 1 ) + ") Modus " + m_modus + " " + m_accumulator_value.toPlainString() + " = " + m_aufgabe;
   }
 
   /**
@@ -153,5 +157,4 @@ public class Day06Accumulator
 
     return pVorgabe;
   }
-
 }
