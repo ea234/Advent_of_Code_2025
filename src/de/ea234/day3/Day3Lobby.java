@@ -396,7 +396,7 @@ public class Day3Lobby
   }
 
   /**
-   * Ausgabe auf System.out
+   * wl = write log 
    * 
    * @param pString der auszugebende String
    */

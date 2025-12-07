@@ -477,7 +477,7 @@ public class Day1SecretEntrance
   }
 
   /**
-   * Ausgabe auf System.out
+   * wl = write log 
    * 
    * @param pString der auszugebende String
    */

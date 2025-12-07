@@ -267,7 +267,7 @@ public class Day05Cafeteria
   }
 
   /**
-   * Ausgabe auf System.out
+   * wl = write log 
    * 
    * @param pString der auszugebende String
    */

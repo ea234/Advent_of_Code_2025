@@ -297,7 +297,7 @@ public class Day06TrashCompactor
   }
 
   /**
-   * Ausgabe auf System.out
+   * wl = write log 
    * 
    * @param pString der auszugebende String
    */

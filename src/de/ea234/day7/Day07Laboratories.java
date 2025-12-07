@@ -46,13 +46,13 @@ public class Day07Laboratories
    * 
    */
 
-  private static final char CHAR_START_POSITION = 'S';
+  private static final char CHAR_START_POSITION   = 'S';
 
-  private static final char CHAR_EMPTY_SPACE    = '.';
+  private static final char CHAR_EMPTY_SPACE      = '.';
 
-  private static final char CHAR_SPLIT_POSITION = '^';
+  private static final char CHAR_SPLIT_POSITION   = '^';
 
-  private static final char CHAR_BEAM           = '|';
+  private static final char CHAR_BEAM             = '|';
 
   public static void main( String[] args )
   {
@@ -62,16 +62,12 @@ public class Day07Laboratories
 
     calcNewGrid( test_content_list, true );
 
-    wl( "" );
-    wl( "------------------------------------------------------------------------" );
-    wl( "" );
-
     calcNewGrid( getListProd(), false );
   }
 
-  private static void calcNewGrid( List< String > pList, boolean pKnzDebug )
+  private static void calcNewGrid( List< String > pListSplitPattern, boolean pKnzDebug )
   {
-    if ( pList == null )
+    if ( pListSplitPattern == null )
     {
       wl( "pList == null" );
 
@@ -80,25 +76,25 @@ public class Day07Laboratories
 
     List< String[] > res_list = new ArrayList< String[] >();
 
-    String str_previos_line = null;
+    String str_beam_positions = null;
 
-    int test_nr = 0;
+    int debug_row_nr_split_pattern = 0;
 
-    for ( int list_index = 0; list_index < pList.size(); list_index++ )
+    for ( int list_index = 0; list_index < pListSplitPattern.size(); list_index++ )
     {
-      String str_current_line = pList.get( list_index );
+      String str_split_pattern = pListSplitPattern.get( list_index );
 
       if ( list_index > 0 )
       {
-        String[] result_line_current = testCalcRow( test_nr++, str_previos_line, str_current_line, pKnzDebug );
+        String[] result_line_current = testCalcRow( debug_row_nr_split_pattern++, str_beam_positions, str_split_pattern, pKnzDebug );
 
         res_list.add( result_line_current );
 
-        str_previos_line = result_line_current[ 0 ];
+        str_beam_positions = result_line_current[ 0 ];
       }
       else
       {
-        str_previos_line = str_current_line;
+        str_beam_positions = str_split_pattern;
       }
     }
 
@@ -110,23 +106,22 @@ public class Day07Laboratories
     int sum_new_beams_total = 0;
     int sum_split_chars_not_hit = 0;
 
-    for ( String[] akt_l : res_list )
+    for ( String[] result_array_row : res_list )
     {
-      sum_splits += getNumber( akt_l[ 1 ] );
-      sum_split_chars_hit += getNumber( akt_l[ 2 ] );
-      sum_existing_beams += getNumber( akt_l[ 3 ] );
-      sum_new_beams_right += getNumber( akt_l[ 4 ] );
-      sum_new_beams_left += getNumber( akt_l[ 5 ] );
-      sum_new_beams_total += getNumber( akt_l[ 6 ] );
+      sum_splits += getNumber( result_array_row[ 1 ] );
+      sum_split_chars_hit += getNumber( result_array_row[ 2 ] );
+      sum_existing_beams += getNumber( result_array_row[ 3 ] );
+      sum_new_beams_right += getNumber( result_array_row[ 4 ] );
+      sum_new_beams_left += getNumber( result_array_row[ 5 ] );
+      sum_new_beams_total += getNumber( result_array_row[ 6 ] );
 
-      sum_split_chars_not_hit += getNumber( akt_l[ 7 ] );
+      sum_split_chars_not_hit += getNumber( result_array_row[ 7 ] );
     }
 
     wl( "" );
-    wl( "sum_splits              = " + sum_splits + " " );
+    wl( "sum_split_characters    = " + sum_splits + " " );
     wl( "sum_split_chars_hit     = " + sum_split_chars_hit + " " );
     wl( "sum_split_chars_not_hit = " + sum_split_chars_not_hit + " " );
-
     wl( "" );
     wl( "sum_existing_beams      = " + sum_existing_beams + " " );
     wl( "" );
@@ -140,25 +135,25 @@ public class Day07Laboratories
     return Integer.parseInt( pString );
   }
 
-  private static String[] testCalcRow( int pnr, String str_current_line, String str_next_line, boolean pKnzDebug )
+  private static String[] testCalcRow( int pnr, String pRowCurrentBeamPosition, String pRowSplitPattern, boolean pKnzDebug )
   {
-    String[] str_result_line = calcRow( str_current_line, str_next_line );
+    String[] str_result_line = calcRow( pRowCurrentBeamPosition, pRowSplitPattern );
 
     if ( pKnzDebug )
     {
       String debug_row = "";
 
       debug_row += FkString.getFeldRechtsMin( pnr, 4 );
-      debug_row += "  A = \"" + str_current_line + "\"";
-      debug_row += " B = \"" + str_next_line + "\"";
+      debug_row += " A = \"" + pRowCurrentBeamPosition + "\"";
+      debug_row += " B = \"" + pRowSplitPattern + "\"";
       debug_row += " C = \"" + str_result_line[ 0 ] + "\"";
-      debug_row += " - Char sum " + str_result_line[ 1 ];
-      debug_row += " - Char hit " + str_result_line[ 2 ];
-      debug_row += " - Char not hit " + str_result_line[ 7 ];
-      debug_row += " - E " + str_result_line[ 3 ];
-      debug_row += " - NR " + str_result_line[ 4 ];
-      debug_row += " - NL " + str_result_line[ 5 ];
-      debug_row += " - NS " + str_result_line[ 6 ];
+      debug_row += " - Char sum " + str_result_line[ 1 ]; // Sum Split Characters 
+      debug_row += " - Char hit " + str_result_line[ 2 ]; // Sum Split Characters hit
+      debug_row += " - Char not hit " + str_result_line[ 7 ]; // Sum Split Characters not hit
+      debug_row += " - E " + str_result_line[ 3 ]; // E = Existing Beams
+      debug_row += " - NR " + str_result_line[ 4 ]; // NR = New Beams to the right
+      debug_row += " - NL " + str_result_line[ 5 ]; // NL = New Beams to the left
+      debug_row += " - NS " + str_result_line[ 6 ]; // NS = Sum of New Beams
 
       wl( debug_row );
     }
@@ -174,7 +169,7 @@ public class Day07Laboratories
 
     int count_split_chars_hit = 0;
     int count_split_chars_not_hit = 0;
-
+    
     int count_new_beams_left = 0;
     int count_new_beams_right = 0;
     int count_existing_beams = 0;
@@ -352,7 +347,7 @@ public class Day07Laboratories
   }
 
   /**
-   * Ausgabe auf System.out
+   * wl = write log 
    * 
    * @param pString der auszugebende String
    */

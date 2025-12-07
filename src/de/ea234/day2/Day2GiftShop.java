@@ -426,7 +426,7 @@ public class Day2GiftShop
   }
 
   /**
-   * Ausgabe auf System.out
+   * wl = write log 
    * 
    * @param pString der auszugebende String
    */

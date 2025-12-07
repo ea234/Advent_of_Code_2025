@@ -338,7 +338,7 @@ public class Day4PrintingDepartment
   }
 
   /**
-   * Ausgabe auf System.out
+   * wl = write log 
    * 
    * @param pString der auszugebende String
    */
