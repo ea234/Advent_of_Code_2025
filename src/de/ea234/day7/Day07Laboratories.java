@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Properties;
 import java.util.stream.Collectors;
 
 import de.ea234.util.FkString;
@@ -17,32 +18,78 @@ public class Day07Laboratories
    * https://adventofcode.com/2025/day/7
    * 
    * 
-   * ------------------------------------------------------------------------
+   * 187987920774390
    * 
-   *    1  A = ".......S......." B = "..............." C = ".......|......." - Splits 0 - Char hit 0 - Char not hit 0 - E 0 - NR 0 - NL 0 - NS 0
-   *    2  A = ".......|......." B = ".......^......." C = "......|^|......" - Splits 2 - Char hit 1 - Char not hit 0 - E 0 - NR 1 - NL 1 - NS 2
-   *    3  A = "......|^|......" B = "..............." C = "......|.|......" - Splits 0 - Char hit 0 - Char not hit 0 - E 2 - NR 0 - NL 0 - NS 0
-   *    4  A = "......|.|......" B = "......^.^......" C = ".....|^|^|....." - Splits 3 - Char hit 2 - Char not hit 0 - E 0 - NR 1 - NL 2 - NS 3
-   *    5  A = ".....|^|^|....." B = "..............." C = ".....|.|.|....." - Splits 0 - Char hit 0 - Char not hit 0 - E 3 - NR 0 - NL 0 - NS 0
-   *    6  A = ".....|.|.|....." B = ".....^.^.^....." C = "....|^|^|^|...." - Splits 4 - Char hit 3 - Char not hit 0 - E 0 - NR 1 - NL 3 - NS 4
-   *    7  A = "....|^|^|^|...." B = "..............." C = "....|.|.|.|...." - Splits 0 - Char hit 0 - Char not hit 0 - E 4 - NR 0 - NL 0 - NS 0
-   *    8  A = "....|.|.|.|...." B = "....^.^...^...." C = "...|^|^|||^|..." - Splits 5 - Char hit 3 - Char not hit 0 - E 1 - NR 2 - NL 3 - NS 5
-   *    9  A = "...|^|^|||^|..." B = "..............." C = "...|.|.|||.|..." - Splits 0 - Char hit 0 - Char not hit 0 - E 6 - NR 0 - NL 0 - NS 0
-   *   10  A = "...|.|.|||.|..." B = "...^.^...^.^..." C = "..|^|^|||^|^|.." - Splits 5 - Char hit 4 - Char not hit 0 - E 2 - NR 1 - NL 4 - NS 5
-   *   11  A = "..|^|^|||^|^|.." B = "..............." C = "..|.|.|||.|.|.." - Splits 0 - Char hit 0 - Char not hit 0 - E 7 - NR 0 - NL 0 - NS 0
-   *   12  A = "..|.|.|||.|.|.." B = "..^...^.....^.." C = ".|^|||^||.||^|." - Splits 6 - Char hit 3 - Char not hit 0 - E 3 - NR 3 - NL 3 - NS 6
-   *   13  A = ".|^|||^||.||^|." B = "..............." C = ".|.|||.||.||.|." - Splits 0 - Char hit 0 - Char not hit 0 - E 9 - NR 0 - NL 0 - NS 0
-   *   14  A = ".|.|||.||.||.|." B = ".^.^.^.^.^...^." C = "|^|^|^|^|.|||^|" - Splits 7 - Char hit 5 - Char not hit 1 - E 2 - NR 2 - NL 5 - NS 7
-   *   15  A = "|^|^|^|^|.|||^|" B = "..............." C = "|.|.|.|.|.|||.|" - Splits 0 - Char hit 0 - Char not hit 0 - E 9 - NR 0 - NL 0 - NS 0
    * 
+   * 
+   *    0 A = ".......S......." B = "..............." C = ".......|......." - Char sum 0 - Char hit 0 - Char not hit 0 - Char hit Exi 0 - E 0 - NR 0 - NL 0 - NS 0 - P 0
+   *    1 A = ".......|......." B = ".......^......." C = "......|^|......" - Char sum 1 - Char hit 1 - Char not hit 0 - Char hit Exi 0 - E 0 - NR 1 - NL 1 - NS 2 - P 2
+   *    2 A = "......|^|......" B = "..............." C = "......|.|......" - Char sum 0 - Char hit 0 - Char not hit 0 - Char hit Exi 0 - E 2 - NR 0 - NL 0 - NS 0 - P 0
+   *    3 A = "......|.|......" B = "......^.^......" C = ".....|^|^|....." - Char sum 2 - Char hit 2 - Char not hit 0 - Char hit Exi 0 - E 0 - NR 2 - NL 1 - NS 3 - P 4
+   *    4 A = ".....|^|^|....." B = "..............." C = ".....|.|.|....." - Char sum 0 - Char hit 0 - Char not hit 0 - Char hit Exi 0 - E 3 - NR 0 - NL 0 - NS 0 - P 0
+   *    5 A = ".....|.|.|....." B = ".....^.^.^....." C = "....|^|^|^|...." - Char sum 3 - Char hit 3 - Char not hit 0 - Char hit Exi 0 - E 0 - NR 3 - NL 1 - NS 4 - P 6
+   *    6 A = "....|^|^|^|...." B = "..............." C = "....|.|.|.|...." - Char sum 0 - Char hit 0 - Char not hit 0 - Char hit Exi 0 - E 4 - NR 0 - NL 0 - NS 0 - P 0
+   *    7 A = "....|.|.|.|...." B = "....^.^...^...." C = "...|^|^|||^|..." - Char sum 3 - Char hit 3 - Char not hit 0 - Char hit Exi 0 - E 1 - NR 3 - NL 2 - NS 5 - P 6
+   *    8 A = "...|^|^|||^|..." B = "..............." C = "...|.|.|||.|..." - Char sum 0 - Char hit 0 - Char not hit 0 - Char hit Exi 0 - E 6 - NR 0 - NL 0 - NS 0 - P 0
+   *    9 A = "...|.|.|||.|..." B = "...^.^...^.^..." C = "..|^|^|||^|^|.." - Char sum 4 - Char hit 4 - Char not hit 0 - Char hit Exi 0 - E 2 - NR 4 - NL 1 - NS 5 - P 8
+   *   10 A = "..|^|^|||^|^|.." B = "..............." C = "..|.|.|||.|.|.." - Char sum 0 - Char hit 0 - Char not hit 0 - Char hit Exi 0 - E 7 - NR 0 - NL 0 - NS 0 - P 0
+   *   11 A = "..|.|.|||.|.|.." B = "..^...^.....^.." C = ".|^|||^||.||^|." - Char sum 3 - Char hit 3 - Char not hit 0 - Char hit Exi 0 - E 3 - NR 3 - NL 3 - NS 6 - P 6
+   *   12 A = ".|^|||^||.||^|." B = "..............." C = ".|.|||.||.||.|." - Char sum 0 - Char hit 0 - Char not hit 0 - Char hit Exi 0 - E 9 - NR 0 - NL 0 - NS 0 - P 0
+   *   13 A = ".|.|||.||.||.|." B = ".^.^.^.^.^...^." C = "|^|^|^|^|A|||^|" - Char sum 6 - Char hit 5 - Char not hit 1 - Char hit Exi 0 - E 2 - NR 5 - NL 2 - NS 7 - P 12
+   *   14 A = "|^|^|^|^|A|||^|" B = "..............." C = "|.|.|.|.|.|||.|" - Char sum 0 - Char hit 0 - Char not hit 0 - Char hit Exi 0 - E 9 - NR 0 - NL 0 - NS 0 - P 0
+   * 
+   * sum_split_characters    = 22 
    * sum_split_chars_hit     = 21 
+   * sum_split_chars_not_hit = 1 
+   * 
+   * sum_hit_existing_beams  = 1 
+   * 
+   * 
    * sum_split_chars_not_hit = 1 
    * 
    * sum_existing_beams      = 48 
    * 
-   * sum_new_beams_left      = 21 
-   * sum_new_beams_right     = 11 
-   * sum_new_beams_total     = 32
+   * sum_new_beams_left      = 11 
+   * sum_new_beams_right     = 21 
+   * sum_new_beams_total     = 32 
+   * 
+   * Sum Possibilities 40
+   *      0     0     0     0     0     0     0     1     0     0     0     0     0     0     0
+   *      0     0     0     0     0     0     1     0     1     0     0     0     0     0     0
+   *      0     0     0     0     0     0     1     0     1     0     0     0     0     0     0
+   *      0     0     0     0     0     1     0     2     0     1     0     0     0     0     0
+   *      0     0     0     0     0     1     0     2     0     1     0     0     0     0     0
+   *      0     0     0     0     1     0     3     0     3     0     1     0     0     0     0
+   *      0     0     0     0     1     0     3     0     3     0     1     0     0     0     0
+   *      0     0     0     1     0     4     0     3     3     1     0     1     0     0     0
+   *      0     0     0     1     0     4     0     3     3     1     0     1     0     0     0
+   *      0     0     1     0     5     0     4     3     4     0     2     0     1     0     0
+   *      0     0     1     0     5     0     4     3     4     0     2     0     1     0     0
+   *      0     1     0     1     5     4     0     7     4     0     2     1     0     1     0
+   *      0     1     0     1     5     4     0     7     4     0     2     1     0     1     0
+   *      1     0     2     0    10     0    11     0    11     0     2     1     1     0     1
+   *      1     0     2     0    10     0    11     0    11     0     2     1     1     0     1
+   *                                                                                           
+   * File Row Count 142 142
+   * 
+   * sum_split_characters    = 1770 
+   * sum_split_chars_hit     = 1675 
+   * sum_split_chars_not_hit = 95 
+   * 
+   * sum_hit_existing_beams  = 95 
+   * 
+   * 
+   * sum_split_chars_not_hit = 95 
+   * 
+   * sum_existing_beams      = 4062 
+   * 
+   * sum_new_beams_left      = 451 
+   * sum_new_beams_right     = 1675 
+   * sum_new_beams_total     = 2126 
+   * Sum Possibilities 187987920774390
+   * 
+   * ------------------------------------------------------------------------
+   * 
    * 
    */
 
@@ -52,7 +99,17 @@ public class Day07Laboratories
 
   private static final char CHAR_SPLIT_POSITION   = '^';
 
-  private static final char CHAR_BEAM             = '|';
+  private static final char CHAR_EXISTING_BEAM    = '|';
+
+  private static final char CHAR_NEW_BEAM_RIGHT   = '|';
+
+  private static final char CHAR_NEW_BEAM_LEFT    = '|';
+
+  private static final char CHAR_NEW_BEAM_BENEATH = '|';
+
+  private static final char CHAR_SPLIT_NOT_HIT    = 'A';
+
+  private static Properties prop_part_2           = null;
 
   public static void main( String[] args )
   {
@@ -105,17 +162,19 @@ public class Day07Laboratories
     int sum_existing_beams = 0;
     int sum_new_beams_total = 0;
     int sum_split_chars_not_hit = 0;
+    int sum_hit_existing_beam = 0;
 
     for ( String[] result_array_row : res_list )
     {
-      sum_splits += getNumber( result_array_row[ 1 ] );
-      sum_split_chars_hit += getNumber( result_array_row[ 2 ] );
-      sum_existing_beams += getNumber( result_array_row[ 3 ] );
-      sum_new_beams_right += getNumber( result_array_row[ 4 ] );
-      sum_new_beams_left += getNumber( result_array_row[ 5 ] );
-      sum_new_beams_total += getNumber( result_array_row[ 6 ] );
+      sum_splits += getNumberInt( result_array_row[ 1 ] );
+      sum_split_chars_hit += getNumberInt( result_array_row[ 2 ] );
+      sum_existing_beams += getNumberInt( result_array_row[ 3 ] );
+      sum_new_beams_right += getNumberInt( result_array_row[ 4 ] );
+      sum_new_beams_left += getNumberInt( result_array_row[ 5 ] );
+      sum_new_beams_total += getNumberInt( result_array_row[ 6 ] );
 
-      sum_split_chars_not_hit += getNumber( result_array_row[ 7 ] );
+      sum_split_chars_not_hit += getNumberInt( result_array_row[ 7 ] );
+      sum_hit_existing_beam += getNumberInt( result_array_row[ 7 ] );
     }
 
     wl( "" );
@@ -123,37 +182,51 @@ public class Day07Laboratories
     wl( "sum_split_chars_hit     = " + sum_split_chars_hit + " " );
     wl( "sum_split_chars_not_hit = " + sum_split_chars_not_hit + " " );
     wl( "" );
+    wl( "sum_hit_existing_beams  = " + sum_hit_existing_beam + " " );
+    wl( "" );
+    wl( "" );
+    wl( "sum_split_chars_not_hit = " + sum_split_chars_not_hit + " " );
+    wl( "" );
     wl( "sum_existing_beams      = " + sum_existing_beams + " " );
     wl( "" );
     wl( "sum_new_beams_left      = " + sum_new_beams_left + " " );
     wl( "sum_new_beams_right     = " + sum_new_beams_right + " " );
     wl( "sum_new_beams_total     = " + sum_new_beams_total + " " );
+
+    String str_split_pattern = pListSplitPattern.get( 0 );
+
+    calcPart2( res_list );
+
+    if ( pKnzDebug )
+    {
+      for ( int x = 0; x < pListSplitPattern.size(); x++ )
+      {
+        wl( getDebugStringx( x, str_split_pattern.length() ) );
+      }
+    }
   }
 
-  private static int getNumber( String pString )
+  private static String[] testCalcRow( int pRowIndex, String pRowCurrentBeamPosition, String pRowSplitPattern, boolean pKnzDebug )
   {
-    return Integer.parseInt( pString );
-  }
-
-  private static String[] testCalcRow( int pnr, String pRowCurrentBeamPosition, String pRowSplitPattern, boolean pKnzDebug )
-  {
-    String[] str_result_line = calcRow( pRowCurrentBeamPosition, pRowSplitPattern );
+    String[] str_result_line = calcRow( pRowIndex, pRowCurrentBeamPosition, pRowSplitPattern );
 
     if ( pKnzDebug )
     {
       String debug_row = "";
 
-      debug_row += FkString.getFeldRechtsMin( pnr, 4 );
+      debug_row += FkString.getFeldRechtsMin( pRowIndex, 4 );
       debug_row += " A = \"" + pRowCurrentBeamPosition + "\"";
       debug_row += " B = \"" + pRowSplitPattern + "\"";
       debug_row += " C = \"" + str_result_line[ 0 ] + "\"";
       debug_row += " - Char sum " + str_result_line[ 1 ]; // Sum Split Characters 
       debug_row += " - Char hit " + str_result_line[ 2 ]; // Sum Split Characters hit
       debug_row += " - Char not hit " + str_result_line[ 7 ]; // Sum Split Characters not hit
+      debug_row += " - Char hit Exi " + str_result_line[ 8 ]; // Sum Split Characters not hit
       debug_row += " - E " + str_result_line[ 3 ]; // E = Existing Beams
       debug_row += " - NR " + str_result_line[ 4 ]; // NR = New Beams to the right
       debug_row += " - NL " + str_result_line[ 5 ]; // NL = New Beams to the left
       debug_row += " - NS " + str_result_line[ 6 ]; // NS = Sum of New Beams
+      debug_row += " - P " + str_result_line[ 9 ]; // NS = Sum of New Beams
 
       wl( debug_row );
     }
@@ -161,7 +234,7 @@ public class Day07Laboratories
     return str_result_line;
   }
 
-  private static String[] calcRow( String pRowCurrentBeamPosition, String pRowSplitPattern )
+  private static String[] calcRow( int pRowIndex, String pRowCurrentBeamPosition, String pRowSplitPattern )
   {
     String str_new_beam_position = "";
 
@@ -169,10 +242,13 @@ public class Day07Laboratories
 
     int count_split_chars_hit = 0;
     int count_split_chars_not_hit = 0;
-    
+
     int count_new_beams_left = 0;
     int count_new_beams_right = 0;
     int count_existing_beams = 0;
+    int count_hit_existing_beam = 0;
+
+    int count_pos = 0;
 
     int flag_position_is_beam = 0;
 
@@ -203,13 +279,15 @@ public class Day07Laboratories
 
       if ( flag_position_is_beam == 1 )
       {
-        str_new_beam_position += CHAR_BEAM;
+        str_new_beam_position += CHAR_NEW_BEAM_RIGHT;
 
         flag_position_is_beam = 0;
       }
       else if ( char_split_pattern == CHAR_SPLIT_POSITION )
       {
-        if ( char_beam_position != CHAR_BEAM )
+        count_pos += 2;
+
+        if ( char_beam_position != CHAR_EXISTING_BEAM )
         {
           /*
            * Split character found, but not hit by beam
@@ -217,7 +295,7 @@ public class Day07Laboratories
            */
           count_split_chars_not_hit++;
 
-          str_new_beam_position += CHAR_EMPTY_SPACE;
+          str_new_beam_position += CHAR_SPLIT_NOT_HIT;
         }
         else
         {
@@ -235,8 +313,6 @@ public class Day07Laboratories
 
             if ( char_temp == CHAR_EMPTY_SPACE )
             {
-              count_new_beams_right++;
-
               if ( input_str_index == 1 )
               {
                 /*
@@ -244,12 +320,24 @@ public class Day07Laboratories
                  * result has only 1 character at this time.
                  * 
                  */
-                str_new_beam_position = "" + CHAR_BEAM;
+                str_new_beam_position = "" + CHAR_NEW_BEAM_LEFT;
 
+                count_new_beams_left++;
               }
               else
               {
-                str_new_beam_position = str_new_beam_position.substring( 0, str_new_beam_position.length() - 1 ) + CHAR_BEAM;
+                if ( char_temp == CHAR_EXISTING_BEAM )
+                {
+                  str_new_beam_position = str_new_beam_position.substring( 0, str_new_beam_position.length() - 1 ) + CHAR_EXISTING_BEAM;
+
+                  count_hit_existing_beam++;
+                }
+                else
+                {
+                  str_new_beam_position = str_new_beam_position.substring( 0, str_new_beam_position.length() - 1 ) + CHAR_NEW_BEAM_LEFT;
+
+                  count_new_beams_left++;
+                }
               }
             }
             else
@@ -277,27 +365,32 @@ public class Day07Laboratories
 
             if ( char_temp == CHAR_EMPTY_SPACE )
             {
-              count_new_beams_left++;
+              count_new_beams_right++;
 
               flag_position_is_beam = 1;
+            }
+            else if ( char_temp == CHAR_EXISTING_BEAM )
+            {
+              count_hit_existing_beam++;
             }
           }
         }
       }
-      else if ( char_beam_position == CHAR_BEAM )
+      else if ( char_beam_position == CHAR_EXISTING_BEAM )
       {
         /*
          * Continue beam down.
          */
         count_existing_beams++;
 
-        str_new_beam_position += CHAR_BEAM;
+        str_new_beam_position += CHAR_EXISTING_BEAM;
+
       }
       else if ( char_beam_position == CHAR_START_POSITION )
       {
         if ( char_split_pattern == CHAR_EMPTY_SPACE )
         {
-          str_new_beam_position += CHAR_BEAM;
+          str_new_beam_position += CHAR_NEW_BEAM_BENEATH;
         }
         else
         {
@@ -312,7 +405,131 @@ public class Day07Laboratories
       input_str_index++;
     }
 
-    return new String[] { str_new_beam_position, "" + ( count_split_chars_hit + count_split_chars_not_hit ), "" + count_split_chars_hit, "" + count_existing_beams, "" + count_new_beams_right, "" + count_new_beams_left, "" + ( count_new_beams_right + count_new_beams_left ), "" + count_split_chars_not_hit };
+    return new String[] { str_new_beam_position, "" + ( count_split_chars_hit + count_split_chars_not_hit ), "" + count_split_chars_hit, "" + count_existing_beams, "" + count_new_beams_right, "" + count_new_beams_left, "" + ( count_new_beams_right + count_new_beams_left ), "" + count_split_chars_not_hit, "" + count_hit_existing_beam, "" + count_pos };
+  }
+
+  private static void calcPart2( List< String[] > res_list )
+  {
+    int akt_row = 0;
+
+    long sum_possibilities_row = 0;
+
+    String prev_row = null;
+
+    for ( String[] result_array_row : res_list )
+    {
+      String current_row = result_array_row[ 0 ];
+
+      sum_possibilities_row = 0;
+
+      int input_str_index = 0;
+
+      while ( input_str_index < current_row.length() )
+      {
+        long akt_value = 0;
+
+        char char_beam_position = current_row.charAt( input_str_index );
+
+        if ( char_beam_position == CHAR_EXISTING_BEAM )
+        {
+          if ( prev_row == null )
+          {
+            akt_value = 1; // Start Value
+          }
+          else
+          {
+            if ( ( input_str_index + 1 ) < current_row.length() )
+            {
+              char char_beam_position_plus_one = current_row.charAt( input_str_index + 1 );
+
+              if ( char_beam_position_plus_one == CHAR_SPLIT_POSITION )
+              {
+                if ( prev_row != null )
+                {
+                  long prev_value_from_above_right = getSplitValue( akt_row - 1, input_str_index + 1 );
+
+                  akt_value += prev_value_from_above_right;
+                }
+              }
+            }
+
+            if ( ( input_str_index - 1 ) >= 0 )
+            {
+              char char_beam_position_minus_one = current_row.charAt( input_str_index - 1 );
+
+              if ( char_beam_position_minus_one == CHAR_SPLIT_POSITION )
+              {
+                if ( prev_row != null )
+                {
+                  long prev_value_from_above_left = getSplitValue( akt_row - 1, input_str_index - 1 );
+
+                  akt_value += prev_value_from_above_left;
+                }
+              }
+            }
+
+            long value_from_direct_above = getSplitValue( akt_row - 1, input_str_index );
+
+            akt_value += value_from_direct_above;
+          }
+        }
+
+        setSplitValue( akt_row, input_str_index, akt_value );
+
+        sum_possibilities_row += akt_value;
+
+        input_str_index++;
+      }
+
+      getProperties().setProperty( "R" + akt_row + "_SUM", "" + sum_possibilities_row );
+
+      akt_row++;
+      prev_row = current_row;
+    }
+
+    wl( "Sum Possibilities " + sum_possibilities_row );
+  }
+
+  private static long getSplitValue( int pRowIndex, int pColIndex )
+  {
+    return getNumberLong( getProperties().getProperty( "R" + pRowIndex + "S" + pColIndex, "0" ) );
+  }
+
+  private static void setSplitValue( int pRowIndex, int pColIndex, long pValue )
+  {
+    getProperties().setProperty( "R" + pRowIndex + "S" + pColIndex, "" + pValue );
+  }
+
+  private static Properties getProperties()
+  {
+    if ( prop_part_2 == null )
+    {
+      prop_part_2 = new Properties();
+    }
+
+    return prop_part_2;
+  }
+
+  private static int getNumberInt( String pString )
+  {
+    return Integer.parseInt( pString );
+  }
+
+  private static long getNumberLong( String pString )
+  {
+    return Long.parseLong( pString );
+  }
+
+  private static String getDebugStringx( int pRowIndex, int pAnzahl )
+  {
+    String erg_s = "";
+
+    for ( int x = 0; x < pAnzahl; x++ )
+    {
+      erg_s += " " + FkString.getFeldRechtsMin( getProperties().getProperty( "R" + pRowIndex + "S" + x, "" ), 5 );
+    }
+
+    return erg_s;
   }
 
   private static List< String > getListProd()
