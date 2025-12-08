@@ -334,7 +334,7 @@ public class FkString
     return nZeichen( pMindestLaenge - feld_wert.length(), " " ) + feld_wert;
   }
 
-  private static String getFeldRechtsMin( long pFeldWert, int pMindestLaenge )
+  public static String getFeldRechtsMin( long pFeldWert, int pMindestLaenge )
   {
     String feld_wert = "" + pFeldWert;
 
