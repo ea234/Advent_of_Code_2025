@@ -18,60 +18,172 @@ public class Day08Playground
    * 
    * 
    * 
-   * 
-   * 
-  162,817,812 and 
+  
+  
+  162,817,812
+  57,618,57
+  906,360,560
+  592,479,940
+  352,342,300
+  466,668,158
+  542,29,236
+  431,825,988
+  739,650,466
+  52,470,668
+  216,146,977
+  819,987,18
+  117,168,530
+  805,96,715
+  346,949,466
+  970,615,88
+  941,993,340
+  862,61,35
+  984,92,344
   425,690,689
   
-  ID   18 -   862 -    61 -    35 - 747990
-  ID    6 -   466 -   668 -   158 - 688344
+  Creating Connection-Box list 
+  
+  Connection-Box count 20
+  
   ID   10 -    52 -   470 -   668 - 669828
   ID    2 -    57 -   618 -    57 - 388422
-  ID    7 -   542 -    29 -   236 - 350301
-  ID    5 -   352 -   342 -   300 - 330868
   ID   13 -   117 -   168 -   530 - 322813
-  ID   17 -   941 -   993 -   340 - 1987130
-  ID    8 -   431 -   825 -   988 - 1842530
-  ID   12 -   819 -   987 -    18 - 1645254
-  ID    4 -   592 -   479 -   940 - 1463505
-  
   ID    1 -   162 -   817 -   812 - 1353077
-  
-  ID   16 -   970 -   615 -    88 - 1326869
-  ID    3 -   906 -   360 -   560 - 1264036
+  ID   11 -   216 -   146 -   977 - 1022501
   ID   15 -   346 -   949 -   466 - 1237473
+  ID    5 -   352 -   342 -   300 - 330868
+  ID   20 -   425 -   690 -   689 - 1131446
+  ID    8 -   431 -   825 -   988 - 1842530
+  ID    6 -   466 -   668 -   158 - 688344
+  ID    7 -   542 -    29 -   236 - 350301
+  ID    4 -   592 -   479 -   940 - 1463505
   ID    9 -   739 -   650 -   466 - 1185777
   ID   14 -   805 -    96 -   715 - 1168466
-  
-  ID   20 -   425 -   690 -   689 - 1131446
-  
+  ID   12 -   819 -   987 -    18 - 1645254
+  ID   18 -   862 -    61 -    35 - 747990
+  ID    3 -   906 -   360 -   560 - 1264036
+  ID   17 -   941 -   993 -   340 - 1987130
+  ID   16 -   970 -   615 -    88 - 1326869
   ID   19 -   984 -    92 -   344 - 1095056
-  ID   11 -   216 -   146 -   977 - 1022501
-   * 
-   * 
-   * 
-  ID   10 -    52 -   470 -   668 - 205029
-  ID    2 -    57 -   618 -    57 - 368961
-  ID   13 -   117 -   168 -   530 - 222422
+  ##### Error ####
+  Found Improvement  this.id 10 to 2 Distance 281406
+  Found Improvement  this.id 10 to 6 Distance 18516
+  Found Improvement  this.id 2 to 10 Distance 281406
+  ##### Error ####
+  Found Improvement  this.id 2 to 13 Distance 65609
+  Found Improvement  this.id 2 to 5 Distance 57554
+  Found Improvement  this.id 2 to 7 Distance 38121
+  Found Improvement  this.id 13 to 10 Distance 347015
+  Found Improvement  this.id 13 to 2 Distance 65609
+  ##### Error ####
+  Found Improvement  this.id 13 to 5 Distance 8055
+  Found Improvement  this.id 1 to 10 Distance 683249
+  ##### Error ####
+  Found Improvement  this.id 1 to 11 Distance 330576
+  Found Improvement  this.id 1 to 15 Distance 115604
+  Found Improvement  this.id 1 to 4 Distance 110428
+  Found Improvement  this.id 1 to 3 Distance 89041
+  Found Improvement  this.id 1 to 16 Distance 26208
+  Found Improvement  this.id 11 to 10 Distance 352673
+  Found Improvement  this.id 11 to 1 Distance 330576
+  ##### Error ####
+  Found Improvement  this.id 11 to 15 Distance 214972
+  Found Improvement  this.id 11 to 20 Distance 108945
+  Found Improvement  this.id 11 to 19 Distance 72555
+  Found Improvement  this.id 15 to 10 Distance 567645
+  Found Improvement  this.id 15 to 1 Distance 115604
+  ##### Error ####
+  Found Improvement  this.id 15 to 20 Distance 106027
+  Found Improvement  this.id 15 to 9 Distance 51696
+  Found Improvement  this.id 15 to 3 Distance 26563
+  Found Improvement  this.id 5 to 10 Distance 338960
+  Found Improvement  this.id 5 to 2 Distance 57554
+  Found Improvement  this.id 5 to 13 Distance 8055
+  ##### Error ####
+  Found Improvement  this.id 20 to 10 Distance 461618
+  Found Improvement  this.id 20 to 1 Distance 221631
+  Found Improvement  this.id 20 to 11 Distance 108945
+  Found Improvement  this.id 20 to 15 Distance 106027
+  ##### Error ####
+  Found Improvement  this.id 20 to 9 Distance 54331
+  Found Improvement  this.id 20 to 14 Distance 37020
+  Found Improvement  this.id 20 to 19 Distance 36390
+  Found Improvement  this.id 8 to 10 Distance 1172702
+  Found Improvement  this.id 8 to 1 Distance 489453
+  ##### Error ####
+  Found Improvement  this.id 8 to 4 Distance 379025
+  Found Improvement  this.id 8 to 12 Distance 197276
+  Found Improvement  this.id 8 to 17 Distance 144600
+  Found Improvement  this.id 6 to 10 Distance 18516
+  ##### Error ####
+  Found Improvement  this.id 7 to 10 Distance 319527
+  Found Improvement  this.id 7 to 2 Distance 38121
+  Found Improvement  this.id 7 to 13 Distance 27488
+  Found Improvement  this.id 7 to 5 Distance 19433
+  ##### Error ####
+  Found Improvement  this.id 4 to 10 Distance 793677
+  Found Improvement  this.id 4 to 1 Distance 110428
+  ##### Error ####
+  Found Improvement  this.id 9 to 10 Distance 515949
+  Found Improvement  this.id 9 to 1 Distance 167300
+  Found Improvement  this.id 9 to 11 Distance 163276
+  Found Improvement  this.id 9 to 15 Distance 51696
+  ##### Error ####
+  Found Improvement  this.id 9 to 14 Distance 17311
+  Found Improvement  this.id 14 to 10 Distance 498638
+  Found Improvement  this.id 14 to 1 Distance 184611
+  Found Improvement  this.id 14 to 11 Distance 145965
+  Found Improvement  this.id 14 to 15 Distance 69007
+  Found Improvement  this.id 14 to 20 Distance 37020
+  Found Improvement  this.id 14 to 9 Distance 17311
+  ##### Error ####
+  Found Improvement  this.id 12 to 10 Distance 975426
+  Found Improvement  this.id 12 to 1 Distance 292177
+  Found Improvement  this.id 12 to 8 Distance 197276
+  Found Improvement  this.id 12 to 4 Distance 181749
+  ##### Error ####
+  Found Improvement  this.id 18 to 10 Distance 78162
+  Found Improvement  this.id 18 to 6 Distance 59646
+  ##### Error ####
+  Found Improvement  this.id 3 to 10 Distance 594208
+  Found Improvement  this.id 3 to 1 Distance 89041
+  Found Improvement  this.id 3 to 15 Distance 26563
+  ##### Error ####
+  Found Improvement  this.id 17 to 10 Distance 1317302
+  Found Improvement  this.id 17 to 1 Distance 634053
+  Found Improvement  this.id 17 to 8 Distance 144600
+  ##### Error ####
+  Found Improvement  this.id 16 to 10 Distance 657041
+  Found Improvement  this.id 16 to 1 Distance 26208
+  ##### Error ####
+  Found Improvement  this.id 19 to 10 Distance 425228
+  Found Improvement  this.id 19 to 1 Distance 258021
+  Found Improvement  this.id 19 to 11 Distance 72555
+  Found Improvement  this.id 19 to 20 Distance 36390
+  ##### Error ####
+  ID   10 -     52   470   668 and    984    92   344  Distance      18516
+  ID    2 -     57   618    57 and    542    29   236  Distance      38121
+  ID   13 -    117   168   530 and    542    29   236  Distance       8055
+  ID    1 -    162   817   812 and    984    92   344  Distance      26208
+  ID   11 -    216   146   977 and    984    92   344  Distance      72555
+  ID   15 -    346   949   466 and    906   360   560  Distance      26563
+  ID    5 -    352   342   300 and    542    29   236  Distance       8055
+  ID   20 -    425   690   689 and    984    92   344  Distance      36390
+  ID    8 -    431   825   988 and    941   993   340  Distance     144600
+  ID    6 -    466   668   158 and    862    61    35  Distance      18516
+  ID    7 -    542    29   236 and    352   342   300  Distance      19433
+  ID    4 -    592   479   940 and    819   987    18  Distance     110428
+  ID    9 -    739   650   466 and    805    96   715  Distance      17311
+  ID   14 -    805    96   715 and    739   650   466  Distance      17311
+  ID   12 -    819   987    18 and    592   479   940  Distance     181749
+  ID   18 -    862    61    35 and    466   668   158  Distance      59646
+  ID    3 -    906   360   560 and    346   949   466  Distance      26563
+  ID   17 -    941   993   340 and    431   825   988  Distance     144600
+  ID   16 -    970   615    88 and    162   817   812  Distance      26208
+  ID   19 -    984    92   344 and    425   690   689  Distance      36390
   
-  ID    1 -   162 -   817 -   812 - 311570
-  ID   20 -   425 -   690 -   689 - 86561
+  162,817,812 and 425,690,689
   
-  ID   11 -   216 -   146 -   977 - 417460
-  ID   15 -   346 -   949 -   466 - 232850
-  ID    5 -   352 -   342 -   300 - 66821
-  ID    8 -   431 -   825 -   988 - 371883
-  ID    6 -   466 -   668 -   158 - 141525
-  ID    7 -   542 -    29 -   236 - 272986
-  ID    4 -   592 -   479 -   940 - 222910
-  ID    9 -   739 -   650 -   466 - 103114
-  ID   14 -   805 -    96 -   715 - 316817
-  ID   12 -   819 -   987 -    18 - 597723
-  ID   18 -   862 -    61 -    35 - 536557
-  ID    3 -   906 -   360 -   560 - 214109
-  ID   17 -   941 -   993 -   340 - 507771
-  ID   16 -   970 -   615 -    88 - 429314
-  ID   19 -   984 -    92 -   344 - 440305
    * 
    * 
    * 
@@ -141,11 +253,11 @@ public class Day08Playground
 
     int anzahl_cb = l_cb.size();
 
-    while ( index_aussen < anzahl_cb - 1 )
+    while ( index_aussen < anzahl_cb )
     {
       Day08ConnectionBox conbox_outer = l_cb.get( index_aussen );
 
-      int index_innnen = index_aussen + 1;
+      int index_innnen = 0;//index_aussen + 1;
 
       while ( index_innnen < anzahl_cb )
       {
@@ -176,6 +288,38 @@ public class Day08Playground
         wl( new_con_box.toStringNeighbour() );
       }
     }
+
+/*
+ * 
+ID   10 -  52 470 668 and  466 668 158
+ID    2 -  57 618 57 and  542 29 236
+ID   13 -  117 168 530 and  352 342 300
+ID    1 -  162 817 812 and  970 615 88
+ID   11 -  216 146 977 and  984 92 344
+ID   15 -  346 949 466 and  906 360 560
+ID    5 -  352 342 300 and  542 29 236
+ID   20 -  425 690 689 and  984 92 344
+ID    8 -  431 825 988 and  941 993 340
+ID    6 -  466 668 158 and  862 61 35
+ID    7 -  542 29 236 and  862 61 35
+ID    4 -  592 479 940 and  970 615 88
+ID    9 -  739 650 466 and  805 96 715
+ID   14 -  805 96 715 and  984 92 344
+ID   12 -  819 987 18 and  970 615 88
+ID   18 -  862 61 35 and  984 92 344
+ID    3 -  906 360 560 and  970 615 88
+ID   17 -  941 993 340 and  970 615 88
+ID   16 -  970 615 88 and  984 92 344
+ID   19 -  984 92 344 and  970 615 88
+
+
+ 162,817,812 and 425,690,689.
+
+
+ *     
+ *     
+ *     
+ */
 
 //    for ( Day08ConnectionBox new_con_box : l_cb )
 //    {
