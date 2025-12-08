@@ -55,14 +55,6 @@ public class Day08ConnectionBox
 
   public long distanceNoSqrt( Day08ConnectionBox pPositionB )
   {
-    /*
-     * Du kannst vermeiden, sqrt zu berechnen, wenn du nur vergleichen willst: 
-     * vergleiche dist^2, also: d2 = (dx)^2 + (dy)^2 + (dz)^2. 
-     * 
-     * Nur am Ende, falls nötig, nimm sqrt(d2).
-     * 
-     */
-
     long distance_x = m_position_x - pPositionB.getPositionX();
 
     long distance_y = m_position_y - pPositionB.getPositionY();
