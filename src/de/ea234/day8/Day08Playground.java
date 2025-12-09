@@ -16,7 +16,7 @@ public class Day08Playground
    * --- Day 8: Playground ---
    * https://adventofcode.com/2025/day/8
    * 
-   * 
+   * https://www.reddit.com/r/adventofcode/comments/1ph3tfc/2025_day_8_solutions/
    * 
   
   

@@ -1,4 +1,4 @@
-package de.ea234.day08;
+package de.ea234.day8;
 
 import de.ea234.util.FkString;
 
