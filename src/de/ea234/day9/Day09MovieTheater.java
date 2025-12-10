@@ -24,8 +24,8 @@ public class Day09MovieTheater
     {
       String[] arr_split = pInputLine.trim().split( "," );
 
-      position_x = Long.parseLong( arr_split[ 0 ] );
-      position_y = Long.parseLong( arr_split[ 1 ] );
+      position_x = Long.parseLong( arr_split[ 1 ] );
+      position_y = Long.parseLong( arr_split[ 0 ] );
     }
 
     public long getX()
@@ -90,37 +90,49 @@ public class Day09MovieTheater
         position_x1 = x2;
         position_x2 = x1;
       }
+
+      if ( y1 > y2 )
+      {
+        position_y1 = y1;
+        position_y2 = y2;
+      }
+      else
+      {
+        position_y1 = y2;
+        position_y2 = y1;
+      }
+
+      wl( "Line x = new Line( " + x1 + ", " + y1 + ", " + x2 + ", " + y2 + ");" );
+    }
+
+    public Line( long x1, long y1, long x2, long y2 )
+    {
+      if ( x1 > x2 )
+      {
+        position_x1 = x1;
+        position_x2 = x2;
+      }
+      else
+      {
+        position_x1 = x2;
+        position_x2 = x1;
+      }
+
+      if ( y1 > y2 )
+      {
+        position_y1 = y1;
+        position_y2 = y2;
+      }
+      else
+      {
+        position_y1 = y2;
+        position_y2 = y1;
+      }
     }
 
     public boolean isPointOnline( LocationPoint pPointB )
     {
-      if ( pPointB.getY() == position_y1 )
-      {
-        if ( ( pPointB.getX() >= position_x1 ) || ( pPointB.getX() <= position_x2 ) )
-        {
-          return true;
-        }
-      }
-
-      if ( pPointB.getX() == position_x1 )
-      {
-        if ( ( pPointB.getY() >= position_y1 ) || ( pPointB.getY() <= position_y2 ) )
-        {
-          return false;
-        }
-      }
-
-      return true;
-    }
-
-    public boolean isPointOnline( Rectangle pR )
-    {
-      boolean kx1 = isPointOnline( pR.getX1(), pR.getY1() );
-      boolean kx2 = isPointOnline( pR.getX1(), pR.getY2() );
-      boolean kx3 = isPointOnline( pR.getX2(), pR.getY1() );
-      boolean kx4 = isPointOnline( pR.getX2(), pR.getY2() );
-
-      return kx1 && kx2 && kx3 && kx4;
+      return isPointOnline( pPointB.getX(), pPointB.getY() );
     }
 
     public boolean isPointOnline( long pX, long pY )
@@ -137,13 +149,12 @@ public class Day09MovieTheater
       {
         if ( ( pY >= position_y1 ) || ( pY <= position_y2 ) )
         {
-          return false;
+          return true;
         }
       }
 
-      return true;
+      return false;
     }
-
   }
 
   static class Rectangle
@@ -170,21 +181,41 @@ public class Day09MovieTheater
         position_x2 = x1;
       }
 
-//      public boolean withIn( LocationPoint pPointB )
-//      {
-//        if ( ( pPointB.getX() < position_x1 ) || ( pPointB.getX() > position_x2 ) )
-//        {
-//          return false;
-//        }
-//
-//        if ( ( pPointB.getY() < position_y1 ) || ( pPointB.getY() > position_y2 ) )
-//        {
-//          return false;
-//        }
-//
-//        return true;
-//      }
+      if ( y1 > y2 )
+      {
+        position_y1 = y1;
+        position_y2 = y2;
+      }
+      else
+      {
+        position_y1 = y2;
+        position_y2 = y1;
+      }
+    }
 
+    public Rectangle( long x1, long y1, long x2, long y2 )
+    {
+      if ( x1 > x2 )
+      {
+        position_x1 = x1;
+        position_x2 = x2;
+      }
+      else
+      {
+        position_x1 = x2;
+        position_x2 = x1;
+      }
+
+      if ( y1 > y2 )
+      {
+        position_y1 = y1;
+        position_y2 = y2;
+      }
+      else
+      {
+        position_y1 = y2;
+        position_y2 = y1;
+      }
     }
 
     public long getX1()
@@ -243,17 +274,73 @@ public class Day09MovieTheater
     List< String > test_content_list = Arrays.stream( test_content.split( ";" ) ).map( String::trim ).collect( Collectors.toList() );
 
     calcNewGrid( test_content_list, true );
-
-//    calcNewGrid( getListProd(), false );
-//    
-//    Point a =  new Point( "2,5" );
-//    Point b =  new Point( "11,1" );
-//    
-//    long cur_s =  a.calcSquare( b );
 //
+    calcNewGrid( getListProd(), false );
+
+    LocationPoint a = new LocationPoint( "2,5" );
+    LocationPoint b = new LocationPoint( "11,1" );
+
+    Rectangle rr = new Rectangle( a, b );
+
+    LocationPoint a1 = new LocationPoint( "2,3" );
+    LocationPoint b1 = new LocationPoint( "9,5" );
+
+    Rectangle rrvalid = new Rectangle( a1, b1 );
+
+//    Line x = new Line( 7, 1, 11, 1);
+//    Line x = new Line( 7, 1, 7, 3);
+
+//    Line x = new Line( 11, 1, 7, 1);
+//    Line x = new Line( 11, 1, 11, 7);
+//    Line x = new Line( 11, 7, 11, 1);
+//    Line x = new Line( 11, 7, 9, 7);
+//  
+    // Line x = new Line( 9, 7, 11, 7);
+//    Line x = new Line( 9, 7, 9, 5);
+//    Line x = new Line( 9, 5, 9, 7);
+//    Line x = new Line( 9, 5, 2, 5);
+//    Line x = new Line( 2, 5, 9, 5);
+//    Line x = new Line( 2, 5, 2, 3);
+
+//    Line x = new Line( 2, 3, 2, 5);
+//    Line x = new Line( 2, 3, 7, 3);
+//    Line x = new Line( 7, 3, 7, 1);
+//    Line x = new Line( 7, 3, 2, 3);
+
+
+
+//    wl( " " + x1.isPointOnline( rr1 ) );
 
 //    wl( a.toString() + " - " + b.toString() + " = " + cur_s );
 //
+
+//          012345678901234
+//        0 ..............
+//        1 ..c....RgggA..
+//        2 .......g...g..
+//        3 ..RggggR...g..
+//        4 ..g........g..
+//        5 ..BggggggR.g..
+//        6 .........g.g..
+//        7 .........RgR..
+//        8 ..............
+
+//
+//
+//        C liegt ausserhalb 
+//
+//         C = 2 , 1 
+//
+//     befinded sich mein Eckpunkt auf einer Linie
+//
+//        * 7,1
+//        * 11,1
+//        * 11,7
+//        * 9,7
+//        * 9,5
+//        * 2,5
+//        * 2,3
+//        * 7,3
 
   }
 
@@ -325,7 +412,11 @@ public class Day09MovieTheater
     {
       for ( LocationPoint location_point2 : list_locaction_points )
       {
-        if ( location_point1.getX() == location_point2.getX() )
+        if ( location_point1.equals( location_point2 ) )
+        {
+          // keine Verbindung zu sich selber 
+        }
+        else if ( location_point1.getX() == location_point2.getX() )
         {
           /*
            * punkte auf gleicher X achse
@@ -348,21 +439,41 @@ public class Day09MovieTheater
 
     long max_p2 = 0;
 
-    for ( Rectangle cur_rect : list_rectangles )
+    for ( Rectangle pR : list_rectangles )
     {
+      /*
+       * while schleife
+       * - alle ecken muessen auf einem punkt liegen.
+       * - checke die punkte dahingehend ab, dass diese auf 
+       *   einer linie liegen.
+       * 
+       * nach der While-Schleife mussen alle Ecken true haben.
+       */
+
+      boolean kx1 = false;
+      boolean kx2 = false;
+      boolean kx3 = false;
+      boolean kx4 = false;
+
       for ( Line line_curr : list_lines )
       {
-        if ( line_curr.isPointOnline( cur_rect ) )
+        kx1 |= line_curr.isPointOnline( pR.getX1(), pR.getY1() );
+        kx2 |= line_curr.isPointOnline( pR.getX1(), pR.getY2() );
+        kx3 |= line_curr.isPointOnline( pR.getX2(), pR.getY1() );
+        kx4 |= line_curr.isPointOnline( pR.getX2(), pR.getY2() );
+      }
+
+      if ( kx1 && kx2 && kx3 && kx4 )
+      {
+        if ( pR.calcSquare() > max_p2 )
         {
-          max_p2 = cur_rect.calcSquare();
+          max_p2 = pR.calcSquare();
         }
       }
     }
 
     wl( "max_p2 = " + max_p2 );
-
   }
-  
 
   private static List< String > getListProd()
   {
@@ -394,6 +505,8 @@ public class Day09MovieTheater
 
     return string_array;
   }
+
+
 
   /**
    * Ausgabe auf System.out
