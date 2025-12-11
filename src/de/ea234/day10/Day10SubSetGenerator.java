@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
-public class Day10SubSetGenerator
+class Day10SubSetGenerator
 {
   private static List< List > generateSubsets( List pListItems )
   {
@@ -38,13 +38,13 @@ public class Day10SubSetGenerator
 
     String[] parts = pInput.trim().split( "\\)\\s*\\(" );
 
-    for ( String p : parts )
+    for ( String cur_part : parts )
     {
-      p = p.replace( "(", "" );
-      p = p.replace( ")", "" );
-      p = p.trim();
+      cur_part = cur_part.replace( "(", "" );
+      cur_part = cur_part.replace( ")", "" );
+      cur_part = cur_part.trim();
 
-      if ( !p.isEmpty() ) list_items.add( "(" + p + ")" );
+      if ( !cur_part.isEmpty() ) list_items.add( "(" + cur_part + ")" );
     }
 
     return list_items;
@@ -75,7 +75,6 @@ public class Day10SubSetGenerator
 
     for ( String subset_string : array_subsets )
     {
-
       String trimmed = subset_string.trim();
 
       if ( !trimmed.isEmpty() )

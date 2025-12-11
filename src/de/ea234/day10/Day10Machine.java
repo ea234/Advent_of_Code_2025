@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 
 import de.ea234.util.FkString;
 
-public class Day10Machine
+class Day10Machine
 {
   private String   light_diagram_required_str       = null;
 
