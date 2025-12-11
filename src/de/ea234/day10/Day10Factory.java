@@ -8,31 +8,19 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import de.ea234.day10.Day10Factory.WiringScheme;
 import de.ea234.util.FkString;
+import de.ea234.util.FkSystem;
 
 public class Day10Factory
 {
+
   /*
    * --- Day 10: Factory ---
    * https://adventofcode.com/2025/day/10
    * 
-   * [.##.] (3) (1,3) (2) (2,3) (0,2) (0,1) {3,5,4,7}
-   * light_diagram_str        =>.##.<
-   * joltage_requirements_str =>{3,5,4,7}<
-   * wiring_schematics_str    =>(3) (1,3) (2) (2,3) (0,2) (0,1)<
-   * Nr 0  3
-   * Nr 1  1 3
-   * Nr 2  2
-   * Nr 3  2 3
-   * Nr 4  0 2
-   * Nr 5  0 1
    * 
-   * light_diagram_cur   =>....<
-   * light_diagram_ref   =>.##.<
-   * [0, 0, 0, 0]
-   * SB .##.
-   * number_of_button_presses = 4
+   * Result Part 1 481
+   * Runtime 00:01:26:965
    */
 
   public static final char CHAR_LIGHT_DIAGRAMM_ON  = '#';
@@ -45,98 +33,46 @@ public class Day10Factory
 
     List< String > test_content_list = Arrays.stream( test_content.split( ";" ) ).map( String::trim ).collect( Collectors.toList() );
 
-    calcInput( "[.##.] (1,2) (2,3) (1,3,0) (3) (1,3) (2) (2,3) (0,2) (0,1) {3,5,4,7}", true );
+    calcMachine( 1, "[.##.] (1,2) (2,3) (1,3,0) (3) (1,3) (2) (2,3) (0,2) (0,1) {3,5,4,7}", true );
+    //calcInput( "[.##.] (0,1,2,3)  (0,2,3) (0,3) {3,5,4,7}", true );
+
+    //calcInput( test_content_list, true );
+
+    calcPart1( getListProd(), false );
   }
 
-  private static void calcNewGrid( List< String > pListInput, boolean pKnzDebug )
+  private static List< Day10Machine > list_machines = new ArrayList< Day10Machine >();
+
+  private static void calcPart1( List< String > pListInput, boolean pKnzDebug )
   {
+    long time_start = System.currentTimeMillis();
+
+    int machine_nr = 0;
+
     for ( String input_str : pListInput )
     {
-      calcInput( input_str, pKnzDebug );
+      calcMachine( machine_nr, input_str, pKnzDebug );
+
+      machine_nr++;
     }
+
+    long result_p1 = 0;
+
+    for ( Day10Machine cm : list_machines )
+    {
+      wl( cm.toString() );
+
+      result_p1 += cm.getNrPressCombinationMin();
+    }
+
+    wl( "Result Part 1 " + result_p1 );
+
+    long time_end = System.currentTimeMillis();
+
+    wl( "Runtime " + FkSystem.getDebugRuntime( time_end - time_start ) );
   }
 
-  static class WiringScheme
-  {
-    int   scheme_index   = 0;
-
-    int[] array_switches = null;
-
-    public WiringScheme( int pNr, String pInput )
-    {
-      String[] btn_i = pInput.split( "," );
-
-      array_switches = java.util.Arrays.stream( btn_i ).mapToInt( s -> Integer.parseInt( s.replaceAll( "[()]", "" ) ) ).toArray();
-
-      scheme_index = pNr;
-    }
-
-    public int getIndex( int pIndex )
-    {
-      return (int) array_switches[ pIndex ];
-    }
-
-    public int getLength()
-    {
-      return array_switches.length;
-    }
-
-    public int[] getArray()
-    {
-      return array_switches;
-    }
-
-    public String toString()
-    {
-      String x_res = "Nr " + scheme_index + " ";
-
-      for ( int switch_nr : array_switches )
-      {
-        x_res += " " + switch_nr;
-      }
-
-      return x_res;
-
-    }
-
-    public String toBinString( int pLen )
-    {
-      String x_res = ".".repeat( pLen );
-
-      int[] array_switches_temp = java.util.Arrays.stream( x_res.split( "" ) ).mapToInt( s -> 0 ).toArray();
-
-      int index_wiring_scheme = 0;
-
-      while ( index_wiring_scheme < getLength() )
-      {
-        array_switches_temp[ getIndex( index_wiring_scheme ) ] = 1;
-
-        index_wiring_scheme++;
-      }
-
-      StringBuilder result_string = new StringBuilder();
-
-      for ( int v : array_switches_temp )
-      {
-        result_string.append( v );
-      }
-
-      return FkString.getFeldLinksMin( toString(), 25 ) + " " + result_string.toString();
-    }
-
-    /*
-    
-      for ( int akt_nr = 0; akt_nr < array_switches.length; akt_nr++ )
-      {
-        x_res += " " + array_switches[ akt_nr ];
-      }
-    
-     */
-  }
-
-  private static int[] ld_array_vorgabe;
-
-  private static int calcInput( String pInput, boolean pKnzDebug )
+  private static int calcMachine( int pNr, String pInput, boolean pKnzDebug )
   {
     int result_value = -1;
 
@@ -146,122 +82,18 @@ public class Day10Factory
 
     if ( ( light_diagram_pos_end > 0 ) && ( joltage_requirements_pos_start > light_diagram_pos_end ) )
     {
-      /*
-       * Removing brackets
-       */
-      String light_diagram_str = pInput.substring( 1, light_diagram_pos_end );
-
-      String joltage_requirements_str = pInput.substring( joltage_requirements_pos_start );
-
       String wiring_schematics_str = pInput.substring( light_diagram_pos_end + 1, joltage_requirements_pos_start ).trim();
 
-      if ( pKnzDebug )
-      {
-        wl( "" );
-        wl( pInput );
+      Day10Machine cur_machine = new Day10Machine( pNr, pInput );
 
-        wl( "light_diagram_str        =>" + light_diagram_str + "<" );
-        wl( "joltage_requirements_str =>" + joltage_requirements_str + "<" );
-        wl( "wiring_schematics_str    =>" + wiring_schematics_str + "<" );
+      String str_combinations = Day10SubSetGenerator.getStringSubSets( wiring_schematics_str );
 
-        String[] wiring_schematics_array = wiring_schematics_str.split( " " );
+      cur_machine.start( str_combinations, pKnzDebug );
 
-        List< WiringScheme > list_wiring_schematicsm = new ArrayList< WiringScheme >();
-
-        int index_nr = 0;
-
-        for ( String wiring_schematics_curr : wiring_schematics_array )
-        {
-          WiringScheme neu_instanzwr = new WiringScheme( index_nr, wiring_schematics_curr );
-
-          list_wiring_schematicsm.add( neu_instanzwr );
-
-          index_nr++;
-        }
-
-        for ( WiringScheme wiring_schematics_curr : list_wiring_schematicsm )
-        {
-          // wl( wiring_schematics_curr.toString() );
-          wl( wiring_schematics_curr.toBinString( light_diagram_str.length() ) );
-        }
-
-        String light_diagram_cur = ".".repeat( light_diagram_str.length() );
-
-        wl( "" );
-        wl( "light_diagram_cur   =>" + light_diagram_cur + "<" );
-        wl( "light_diagram_ref   =>" + light_diagram_str + "<" );
-
-        int[] ld_array_currrent = light_diagram_str.chars().map( c -> 0 ).toArray();
-
-        wl( Arrays.toString( ld_array_currrent ) );
-
-        int[] arr1 = { 0, 3, 4 };
-
-        int number_of_button_presses = testButtonPress2( light_diagram_str, arr1, list_wiring_schematicsm );
-
-        wl( "number_of_button_presses = " + number_of_button_presses );
-
-        int[] ld_array_vorgabe = light_diagram_str.chars().map( c -> c == CHAR_LIGHT_DIAGRAMM_OFF ? 0 : 1 ).toArray();
-
-        wl( "ldvorg " + Arrays.toString( ld_array_vorgabe ) );
-
-      }
+      list_machines.add( cur_machine );
     }
 
     return result_value;
-  }
-
-  /*
-   * Rekursion
-   * - Abbruchbedingung, wenn geforderte Stellung erreicht ist.
-   * 
-   * 
-   * 
-   */
-
-  public static int testButtonPress2( String pLdVorgabe, int[] pCombination, List< WiringScheme > list_wiring_schematicsm )
-  {
-    int[] ld_array_currrent = pLdVorgabe.chars().map( c -> 0 ).toArray();
-
-    int number_of_button_presses = 0;
-
-    int index_combination = 0;
-
-    while ( index_combination < pCombination.length )
-    {
-      WiringScheme ws_c = list_wiring_schematicsm.get( index_combination );
-
-      int index_wiring_scheme = 0;
-
-      while ( index_wiring_scheme < ws_c.getLength() )
-      {
-        ld_array_currrent[ ws_c.getIndex( index_wiring_scheme ) ] = ld_array_currrent[ ws_c.getIndex( index_wiring_scheme ) ] == 0 ? 1 : 0;
-
-        number_of_button_presses++;
-
-        index_wiring_scheme++;
-      }
-
-      index_combination++;
-    }
-
-    StringBuilder result_string = new StringBuilder();
-
-    for ( int v : ld_array_currrent )
-    {
-      result_string.append( v == 0 ? CHAR_LIGHT_DIAGRAMM_OFF : CHAR_LIGHT_DIAGRAMM_ON );
-    }
-
-    String ld_pattern_after_button_presses = result_string.toString();
-
-    wl( "SB " + ld_pattern_after_button_presses );
-
-    if ( ld_pattern_after_button_presses.equalsIgnoreCase( pLdVorgabe ) )
-    {
-      return number_of_button_presses;
-    }
-
-    return Integer.MAX_VALUE;
   }
 
   private static List< String > getListProd()
@@ -270,7 +102,7 @@ public class Day10Factory
 
     List< String > string_array = new ArrayList< String >();
 
-    String datei_input = "/mnt/hd4tbb/daten/zdownload/advent_of_code_2025__day9_input.txt";
+    String datei_input = "/mnt/hd4tbb/daten/zdownload/advent_of_code_2025__day10_input.txt";
 
     try (BufferedReader buffered_reader = new BufferedReader( new FileReader( datei_input ) ))
     {
