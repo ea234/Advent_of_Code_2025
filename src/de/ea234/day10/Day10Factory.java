@@ -8,6 +8,9 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import de.ea234.day10.Day10Factory.WiringScheme;
+import de.ea234.util.FkString;
+
 public class Day10Factory
 {
   /*
@@ -42,7 +45,7 @@ public class Day10Factory
 
     List< String > test_content_list = Arrays.stream( test_content.split( ";" ) ).map( String::trim ).collect( Collectors.toList() );
 
-    calcInput( "[.##.] (3) (1,3) (2) (2,3) (0,2) (0,1) {3,5,4,7}", true );
+    calcInput( "[.##.] (1,2) (2,3) (1,3,0) (3) (1,3) (2) (2,3) (0,2) (0,1) {3,5,4,7}", true );
   }
 
   private static void calcNewGrid( List< String > pListInput, boolean pKnzDebug )
@@ -87,14 +90,51 @@ public class Day10Factory
     {
       String x_res = "Nr " + scheme_index + " ";
 
+      for ( int switch_nr : array_switches )
+      {
+        x_res += " " + switch_nr;
+      }
+
+      return x_res;
+
+    }
+
+    public String toBinString( int pLen )
+    {
+      String x_res = ".".repeat( pLen );
+
+      int[] array_switches_temp = java.util.Arrays.stream( x_res.split( "" ) ).mapToInt( s -> 0 ).toArray();
+
+      int index_wiring_scheme = 0;
+
+      while ( index_wiring_scheme < getLength() )
+      {
+        array_switches_temp[ getIndex( index_wiring_scheme ) ] = 1;
+
+        index_wiring_scheme++;
+      }
+
+      StringBuilder result_string = new StringBuilder();
+
+      for ( int v : array_switches_temp )
+      {
+        result_string.append( v );
+      }
+
+      return FkString.getFeldLinksMin( toString(), 25 ) + " " + result_string.toString();
+    }
+
+    /*
+    
       for ( int akt_nr = 0; akt_nr < array_switches.length; akt_nr++ )
       {
         x_res += " " + array_switches[ akt_nr ];
       }
-
-      return x_res;
-    }
+    
+     */
   }
+
+  private static int[] ld_array_vorgabe;
 
   private static int calcInput( String pInput, boolean pKnzDebug )
   {
@@ -141,7 +181,8 @@ public class Day10Factory
 
         for ( WiringScheme wiring_schematics_curr : list_wiring_schematicsm )
         {
-          wl( wiring_schematics_curr.toString() );
+          // wl( wiring_schematics_curr.toString() );
+          wl( wiring_schematics_curr.toBinString( light_diagram_str.length() ) );
         }
 
         String light_diagram_cur = ".".repeat( light_diagram_str.length() );
@@ -159,6 +200,11 @@ public class Day10Factory
         int number_of_button_presses = testButtonPress2( light_diagram_str, arr1, list_wiring_schematicsm );
 
         wl( "number_of_button_presses = " + number_of_button_presses );
+
+        int[] ld_array_vorgabe = light_diagram_str.chars().map( c -> c == CHAR_LIGHT_DIAGRAMM_OFF ? 0 : 1 ).toArray();
+
+        wl( "ldvorg " + Arrays.toString( ld_array_vorgabe ) );
+
       }
     }
 
@@ -224,7 +270,7 @@ public class Day10Factory
 
     List< String > string_array = new ArrayList< String >();
 
-    String datei_input = "/mnt/hd4tbb/daten/zdownload/advent_of_code_2025__day10_input.txt";
+    String datei_input = "/mnt/hd4tbb/daten/zdownload/advent_of_code_2025__day9_input.txt";
 
     try (BufferedReader buffered_reader = new BufferedReader( new FileReader( datei_input ) ))
     {
