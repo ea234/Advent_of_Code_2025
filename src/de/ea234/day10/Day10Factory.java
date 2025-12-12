@@ -23,29 +23,31 @@ public class Day10Factory
    * Runtime 00:01:26:965
    */
 
-  public static final char CHAR_LIGHT_DIAGRAMM_ON  = '#';
-
-  public static final char CHAR_LIGHT_DIAGRAMM_OFF = '.';
-
   public static void main( String[] args )
   {
     String test_content = "[.##.] (3) (1,3) (2) (2,3) (0,2) (0,1) {3,5,4,7};[...#.] (0,2,3,4) (2,3) (0,4) (0,1,2) (1,2,3,4) {7,5,12,7,2};[.###.#] (0,1,2,3,4) (0,3,4) (0,1,2,4,5) (1,2) {10,11,11,5,10,5}";
 
     List< String > test_content_list = Arrays.stream( test_content.split( ";" ) ).map( String::trim ).collect( Collectors.toList() );
 
-    calcMachine( 1, "[.##.] (1,2) (2,3) (1,3,0) (3) (1,3) (2) (2,3) (0,2) (0,1) {3,5,4,7}", true );
-    //calcInput( "[.##.] (0,1,2,3)  (0,2,3) (0,3) {3,5,4,7}", true );
-
-    //calcInput( test_content_list, true );
+    //calcMachine( 1, "[.##.] (1,2) (2,3) (1,3,0) (3) (1,3) (2) (2,3) (0,2) (0,1) {3,5,4,7}", true );
+    //calcMachine( 1, "[.##.] (0,1,2,3)  (0,2,3) (0,3) {3,5,4,7}", true );
 
     calcPart1( getListProd(), false );
+
+    calcPart1( test_content_list, true );
   }
 
-  private static List< Day10Machine > list_machines = new ArrayList< Day10Machine >();
+  private static List< Day10MachinePart1 > list_machines = new ArrayList< Day10MachinePart1 >();
 
   private static void calcPart1( List< String > pListInput, boolean pKnzDebug )
   {
+    list_machines = new ArrayList< Day10MachinePart1 >();
+
     long time_start = System.currentTimeMillis();
+
+    wl( "" );
+    wl( "Calculating Machines --------------------------------------------" );
+    wl( "" );
 
     int machine_nr = 0;
 
@@ -56,24 +58,37 @@ public class Day10Factory
       machine_nr++;
     }
 
+    wl( "" );
+    wl( "Result ----------------------------------------------------------" );
+    wl( "" );
+
     long result_p1 = 0;
 
-    for ( Day10Machine cm : list_machines )
+    for ( Day10MachinePart1 cur_machine : list_machines )
     {
-      wl( cm.toString() );
+      wl( cur_machine.toString() );
 
-      result_p1 += cm.getNrPressCombinationMin();
+      result_p1 += cur_machine.getNrPressCombinationMin();
     }
 
+    wl( "" );
     wl( "Result Part 1 " + result_p1 );
 
     long time_end = System.currentTimeMillis();
 
-    wl( "Runtime " + FkSystem.getDebugRuntime( time_end - time_start ) );
+    wl( "Runtime       " + FkSystem.getDebugRuntime( time_end - time_start ) );
+    wl( "" );
   }
 
   private static int calcMachine( int pNr, String pInput, boolean pKnzDebug )
   {
+    if ( pKnzDebug )
+    {
+      wl( "" );
+      wl( "Calc Machine " + pNr + " ----------------------------------------------------------" );
+      wl( "" );
+    }
+
     int result_value = -1;
 
     int light_diagram_pos_end = pInput.indexOf( "]" );
@@ -84,7 +99,7 @@ public class Day10Factory
     {
       String wiring_schematics_str = pInput.substring( light_diagram_pos_end + 1, joltage_requirements_pos_start ).trim();
 
-      Day10Machine cur_machine = new Day10Machine( pNr, pInput );
+      Day10MachinePart1 cur_machine = new Day10MachinePart1( pNr, pInput );
 
       String str_combinations = Day10SubSetGenerator.getStringSubSets( wiring_schematics_str );
 
@@ -136,4 +151,5 @@ public class Day10Factory
   {
     System.out.println( pString );
   }
+
 }
