@@ -235,7 +235,12 @@ public class FkString
     return pInhalt + nZeichen( pMindestLaenge - pInhalt.length(), " " );
   }
 
-  private static String getFeldLinksMin( int pInhalt, int pMindestLaenge )
+  public static String getFeldLinksMin( int pInhalt, int pMindestLaenge )
+  {
+    return getFeldLinksMin( "" + pInhalt, " ", pMindestLaenge, pMindestLaenge );
+  }
+
+  public static String getFeldLinksMin( long pInhalt, int pMindestLaenge )
   {
     return getFeldLinksMin( "" + pInhalt, " ", pMindestLaenge, pMindestLaenge );
   }

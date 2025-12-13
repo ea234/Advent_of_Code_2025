@@ -8,17 +8,17 @@ import de.ea234.util.FkString;
 
 public class Day11Device extends Day11Reactor
 {
-  private String              m_device_id      = null;
+  private String              m_device_id       = null;
 
-  private String              m_input_line     = "";
+  private String              m_input_line      = "";
 
-  private List< Day11Device > m_connects_to    = new ArrayList< Day11Device >();
+  private List< Day11Device > m_connects_to     = new ArrayList< Day11Device >();
 
-  private List< Day11Device > m_connected_from = new ArrayList< Day11Device >();
+  //private List< Day11Device > m_connected_from = new ArrayList< Day11Device >();
 
-  private List< String >      m_paths_to_you   = new ArrayList< String >();
+  private List< String >      m_paths_to_device = new ArrayList< String >();
 
-  private String              m_str_nachfolger = null;
+  private String              m_str_nachfolger  = null;
 
   public Day11Device( int pNr, String pInputStr )
   {
@@ -55,26 +55,59 @@ public class Day11Device extends Day11Reactor
   {
     return m_connects_to.size();
   }
-
-  public void addFromDevice( Day11Device pDevice )
+  
+  public List< Day11Device > getListConnctsTo()
   {
-    m_connected_from.add( pDevice );
+    return m_connects_to;
   }
 
-  public Day11Device getFromDevice( int pIndex )
-  {
-    if ( ( pIndex < 0 ) || ( pIndex > m_connected_from.size() ) )
-    {
-      return null;
-    }
 
-    return m_connects_to.get( pIndex );
-  }
-
-  public int getConnectsFromCount()
-  {
-    return m_connected_from.size();
-  }
+//  public void addFromDevice( Day11Device pDevice )
+//  {
+//    m_connected_from.add( pDevice );
+//  }
+//
+//  public Day11Device getFromDevice( int pIndex )
+//  {
+//    if ( ( pIndex < 0 ) || ( pIndex > m_connected_from.size() ) )
+//    {
+//      return null;
+//    }
+//
+//    return m_connects_to.get( pIndex );
+//  }
+//
+//  public int getConnectsFromCount()
+//  {
+//    return m_connected_from.size();
+//  }
+//
+//  public String getConnectedFrom()
+//  {
+//    String str_connected_from = "";
+//
+  
+//    for ( Day11Device device_inst : m_connected_from )
+//    {
+//      str_connected_from += device_inst.getDeviceID() + ", ";
+//    }
+//
+//    return str_connected_from;
+//  }
+//
+//  public boolean isConnectedFromDevice( String pDeviceID )
+//  {
+//    for ( Day11Device device_inst : m_connected_from )
+//    {
+//      if ( device_inst.isDeviceID( pDeviceID ) )
+//      {
+//        return true;
+//      }
+//    }
+//
+//    return false;
+//  }
+//
 
   public String getConnectsTo()
   {
@@ -88,37 +121,30 @@ public class Day11Device extends Day11Reactor
     return str_connects_to;
   }
 
-  public String getConnectedFrom()
-  {
-    String str_connected_from = "";
-
-    for ( Day11Device device_inst : m_connected_from )
-    {
-      str_connected_from += device_inst.getDeviceID() + ", ";
-    }
-
-    return str_connected_from;
-  }
-
   public String getPathsToYou()
-  {
-    String s_erg = "";
-
-    for ( String cur_path : m_paths_to_you )
-    {
-      s_erg += cur_path + "\n";
-    }
-
-    return s_erg;
-  }
-
-  public String getPathsToYouFilter( String pMustHaveID )
+  
   {
     String s_erg = "";
 
     int nr = 0;
 
-    for ( String cur_path : m_paths_to_you )
+    for ( String cur_path : m_paths_to_device )
+    {
+      nr++;
+
+      s_erg += "  " + FkString.getFeldRechtsMin( nr, 5 ) + " " + cur_path + "\n";
+    }
+
+    return s_erg;
+  }
+
+  public String getPathsToDeviceFilter( String pMustHaveID )
+  {
+    String s_erg = "";
+
+    int nr = 0;
+
+    for ( String cur_path : m_paths_to_device )
     {
       if ( cur_path.contains( pMustHaveID ) )
       {
@@ -154,30 +180,66 @@ public class Day11Device extends Day11Reactor
     return false;
   }
 
-  public boolean isConnectedFromDevice( String pDeviceID )
-  {
-    for ( Day11Device device_inst : m_connected_from )
-    {
-      if ( device_inst.isDeviceID( pDeviceID ) )
-      {
-        return true;
-      }
-    }
-
-    return false;
-  }
-
-  public int getPath( int pIndexTo, String pPathToYou )
+  public int getPath( int pIndexTo, String pPathToDevice )
   {
     int count_nr = 1;
 
-    m_paths_to_you.add( pPathToYou );
+    m_paths_to_device.add( pPathToDevice );
 
     if ( m_connects_to.size() > 0 )
     {
       for ( Day11Device device_inst : m_connects_to )
       {
-        count_nr += device_inst.getPath( pIndexTo, pPathToYou + ", " + m_device_id );
+        count_nr += device_inst.getPath( pIndexTo, pPathToDevice + ", " + m_device_id );
+      }
+    }
+
+    return count_nr;
+  }
+
+  public int getPath2( int pIndexTo, String pPathToDevice, String pDeviceIDEnd, String pDeviceIDAvoid )
+  {
+    int count_nr = 1;
+
+    m_paths_to_device.add( pPathToDevice );
+
+    if ( isDeviceID( pDeviceIDAvoid ) )
+    {
+      return 1;
+    }
+
+    if ( isDeviceID( pDeviceIDEnd ) )
+    {
+      return 1;
+    }
+
+    if ( m_connects_to.size() > 0 )
+    {
+      for ( Day11Device device_inst : m_connects_to )
+      {
+        count_nr += device_inst.getPath2( pIndexTo, pPathToDevice + ", " + m_device_id, pDeviceIDEnd, pDeviceIDAvoid );
+      }
+    }
+
+    return count_nr;
+  }
+
+  public int getPath3( int pIndexTo, String pPathToDevice, String pDeviceIDAvoid )
+  {
+    if ( isDeviceID( pDeviceIDAvoid ) )
+    {
+      return 0;
+    }
+
+    int count_nr = 1;
+
+    m_paths_to_device.add( pPathToDevice );
+
+    if ( m_connects_to.size() > 0 )
+    {
+      for ( Day11Device device_inst : m_connects_to )
+      {
+        count_nr = device_inst.getPath3( pIndexTo, pPathToDevice + ", " + m_device_id, pDeviceIDAvoid );
       }
     }
 
@@ -186,6 +248,6 @@ public class Day11Device extends Day11Reactor
 
   public String toString()
   {
-    return "Nr " + FkString.getFeldRechtsMin( m_input_line, 4 ) + "  Device " + m_device_id + " - to " + FkString.getFeldLinksMin( m_str_nachfolger, 50 ) + " - to " + FkString.getFeldLinksMin( getConnectsTo(), 50 ) + " - from " + FkString.getFeldLinksMin( getConnectedFrom(), 50 );
+    return "Nr " + FkString.getFeldRechtsMin( m_input_line, 4 ) + "  Device " + m_device_id + " - to " + FkString.getFeldLinksMin( getConnectsTo(), 50 );
   }
 }
