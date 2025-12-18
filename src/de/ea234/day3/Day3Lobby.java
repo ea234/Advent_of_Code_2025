@@ -160,6 +160,64 @@ public class Day3Lobby
    *  Input     234234234234278          234234234234278
    *  Indexe                 12                       12
    * 
+
+Update 16.12.2025 - Found another approach 
+
+Es wird zuerst mit dem kleinstem Wert der Zielzahl begonnen. 
+Es wird vom Anfang an, erstmal die kleinste Ziffer gesucht, welche am weitesten hinten in der Eingabe steht. 
+
+Danach wird mit der zweiten Stelle der Zielzahl weiter gemacht. 
+Diese Suche endet vor dem Index aus Schritt 1.
+
+
+Es wird mit der kleinsten Stelle der geforderten Zahlananzahl begonnen. 
+Das ist 
+   *  Input     234234234234278          234234234234278
+   *  Indexe    12345678
+   * 
+
+   *
+   * ----------------------------------------------------------------------
+   * 
+   * Version 1:
+   * - From left to right
+   * - All Indizies start initialy from the start of the input string.
+   * - You start with the least significant digit (Index 3)
+   * - You search for the highest number further down the input string
+   * - Same values cause the current index to be shifted further back
+   * - As a result, you obtain an index position that must not be exceeded by the subsequent indizies.  
+   *  
+   *  
+   * Version 2:
+   * - From right to left
+   * - All Indizies start initialy from the end of the input string.
+   * - You start with the highes significant digit for the result (Index 1)
+   * - You search the highest number towards the start of the input string.
+   * - Your search ends, at the index found in the previous loop.
+   * 
+   * 
+   * Version 2 produces less comparisons, because in the worst case, all the  
+   * indizies will end at the string end.
+   * 
+   *  
+   *            Version 1                Version 2
+   *            ---->                              <----   
+   *  Input     118191117111311          118191117111311
+   *  Indexe    123                                  123
+   *  
+   *    
+   *  Input     118191117111311          118191117111311
+   *  Indexe    12          3                1        23
+   *  
+   *  
+   *  Input     118191117111311          118191117111311
+   *  Indexe    1       2     3              1   2     3
+   *  
+   *  
+   *  Input     118191117111311          118191117111311
+   *  Indexe        1   2     3              1   2   3
+
+
    */
 
   private static final BigDecimal BIG_DECIMAL_0  = new BigDecimal( "0" );
